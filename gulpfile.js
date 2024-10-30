@@ -15,7 +15,7 @@ const DEFAULT_OPTIONS = {
   /** print the path of each generated / modified file to the console */
   verbose: true,
   /** Default glob for files to search in. Default: Search all folder and files recursively */
-  defaultFileGlob: '**/*.{asp,aspx,cshtml,ejs,erb,hbs,html,htm,jsp,php,twig,vue}'
+  defaultFileGlob: '**/*.{asp,aspx,cshtml,gohtml,gotmpl,ejs,erb,hbs,html,htm,js,jsp,php,ts,twig,vue}',
 };
 
 async function migrate(cb) {
@@ -203,7 +203,7 @@ async function migrate(cb) {
         }),
       )
       .pipe(
-        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bclose\b([^'"]*['"])/g, function (match, p1, p2) {
+        replace(/(<[^>]*class\s*=\s*['"])\s*\bclose\b\s*(['"])/g, function (match, p1, p2) {
           cssClassChanged++;
           return p1 + 'btn-close' + p2;
         }),
@@ -605,6 +605,12 @@ async function migrate(cb) {
         }),
       )
       .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bsr-only sr-only-focusable\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'visually-hidden-focusable' + p2;
+        }),
+      )
+      .pipe(
         replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bsr-only-focusable\b([^'"]*['"])/g, function (match, p1, p2) {
           cssClassChanged++;
           return p1 + 'visually-hidden-focusable' + p2;
@@ -686,6 +692,12 @@ async function migrate(cb) {
         replace(/(<[^>]*class\s*=\s*['"][^'"]*)\btext-monospace\b([^'"]*['"])/g, function (match, p1, p2) {
           cssClassChanged++;
           return p1 + 'font-monospace' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bwidth\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'collapse-horizontal' + p2;
         }),
       )
       .pipe(replace(/<select([^>]*)\bclass=['"]([^'"]*)form-control(-lg|-sm)?([^'"]*)['"]([^>]*)>/g, '<select$1class="$2form-select$3$4"$5>'))
