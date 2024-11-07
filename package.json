@@ -19,29 +19,25 @@
   "main": "gulpfile.js",
   "scripts": {
     "start": "gulp migrate --src ./src --dest ./dest",
+    "start3to4": "gulp migrate3to4 --src ./src3to4 --dest ./dest",
+    "start4to3": "gulp migrate4to3 --src ./src4to3 --dest ./dest",
+    "start5to4": "gulp migrate5to4 --src ./src5to4 --dest ./dest",
     "htmlhint": "npx htmlhint **/*.html",
     "lint": "npx eslint@8.57.1 *.js --fix",
-    "prettier": "npx prettier@3 --write \"**/*.{html,js,md,yml}\"",
+    "prettier": "npx prettier@3 --write \"**/*.{html,cshtml,js,md,yml}\"",
     "test": "npm run lint && npm run prettier && npm run start"
   },
   "dependencies": {
-    "gulp": "5.0.0",
-    "gulp-replace": "1.1.4"
+    "gulp": "^5.0.0",
+    "gulp-replace": "^1.1.4"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.14.0",
+    "eslint": "^9.14.0",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.3.3"
   },
   "files": [
     "gulpfile.js"
-  ],
-  "eslintConfig": {
-    "extends": "eslint:recommended",
-    "parserOptions": {
-      "ecmaVersion": 2020
-    },
-    "env": {
-      "node": true,
-      "es6": true
-    }
-  },
-  "engines": {
-    "node": ">=18"
-  }
+  ]
 }

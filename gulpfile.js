@@ -18,6 +18,849 @@ const DEFAULT_OPTIONS = {
   defaultFileGlob: '**/*.{asp,aspx,cshtml,gohtml,gotmpl,ejs,erb,hbs,html,htm,js,jsp,php,ts,twig,vue}',
 };
 
+async function migrate3to4(cb) {
+  const options = parseArgs();
+
+  console.log(options);
+  // process.exit(0)
+
+  let dataAttrChanged = 0;
+  let CDNLinksChanged = 0;
+  let cssClassChanged = 0;
+
+  return (
+    /** when overwrite flag is true, set base option */
+    src([`${options.src}/${options.defaultFileGlob}`], { base: options.overwrite ? './' : undefined })
+      // MaxCDN CSS
+      .pipe(
+        replace(
+          /<link href=["']https:\/\/maxcdn\.bootstrapcdn\.com\/bootstrap\/3\.\d+\.\d+\/css\/bootstrap(\.min)?\.css["'] rel=["']stylesheet["'] ?\/?>/g,
+          function () {
+            CDNLinksChanged++;
+            return '<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">';
+          },
+        ),
+      )
+      // CDNJS CSS
+      .pipe(
+        replace(
+          /<link href=["']https:\/\/cdnjs\.cloudflare\.com\/ajax\/libs\/bootstrap\/3\.\d+\.\d+\/dist\/css\/bootstrap(\.min)?\.css["'] rel=["']stylesheet["'] ?\/?>/g,
+          function () {
+            CDNLinksChanged++;
+            return '<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/css/bootstrap.min.css" rel="stylesheet">';
+          },
+        ),
+      )
+      // JSDelivr CSS
+      .pipe(
+        replace(/<link href=["']https:\/\/cdn\.jsdelivr\.net\/npm\/bootstrap@3\.\d+\.\d+\/dist\/css\/bootstrap(\.min)?\.css["'] rel=["']stylesheet["'] ?\/?>/g, function () {
+          CDNLinksChanged++;
+          return '<link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">';
+        }),
+      )
+      // Stackpath CSS
+      .pipe(
+        replace(/<link href=["']https:\/\/stackpath\.bootstrapcdn\.com\/bootstrap\/3\.\d+\.\d+\/css\/bootstrap(\.min)?\.css["'] rel=["']stylesheet["'] ?\/?>/g, function () {
+          CDNLinksChanged++;
+          return '<link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">';
+        }),
+      )
+      // UNPKG CSS
+      .pipe(
+        replace(/<link href=["']https:\/\/unpkg\.com\/bootstrap\/3\.\d+\.\d+\/css\/bootstrap(\.min)?\.css["'] rel=["']stylesheet["'] ?\/?>/g, function () {
+          CDNLinksChanged++;
+          return '<link href="https://unpkg.com/bootstrap@4.6.2/dist/css/bootstrap.min.css">';
+        }),
+      )
+      // MaxCDN JS
+      .pipe(
+        replace(/<link href=["']https:\/\/maxcdn\.bootstrapcdn\.com\/bootstrap\/3\.\d+\.\d+\/js\/bootstrap(\.min)?\.js["']*>/g, function () {
+          CDNLinksChanged++;
+          return '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js">';
+        }),
+      )
+      // CDNJS JS
+      .pipe(
+        replace(/<script src=["']https:\/\/cdn\.cloudflare\.com\/ajax\/libs\/bootstrap\/3\.\d+\.\d+\/dist\/js\/bootstrap(\.min)?\.js["']>/g, function () {
+          CDNLinksChanged++;
+          return '<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.min.js">';
+        }),
+      )
+      // JSDelivr JS
+      .pipe(
+        replace(/<script src=["']https:\/\/cdn\.jsdelivr\.net\/npm\/bootstrap@3\.\d+\.\d+\/dist\/js\/bootstrap(\.min)?\.js["']>/g, function () {
+          CDNLinksChanged++;
+          return '<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js">';
+        }),
+      )
+      // Stackpath JS
+      .pipe(
+        replace(/<script src=["']https:\/\/stackpath\.bootstrapcdn\.com\/bootstrap\/3\.\d+\.\d+\/js\/bootstrap(\.min)?\.js["']>/g, function () {
+          CDNLinksChanged++;
+          return '<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js">';
+        }),
+      )
+      // UNPKG JS
+      .pipe(
+        replace(/<script src=["']https:\/\/unpkg\.com\/bootstrap\/3\.\d+\.\d+\/js\/bootstrap(\.min)?\.js["']>/g, function () {
+          CDNLinksChanged++;
+          return '<script src="https://unpkg.com/bootstrap@4.6.2/dist/js/bootstrap.min.js">';
+        }),
+      )
+      // CDNJS Bundle JS
+      .pipe(
+        replace(/<script src=["']https:\/\/cdn\.cloudflare\.com\/ajax\/libs\/bootstrap\/3\.\d+\.\d+\/dist\/js\/bootstrap\.bundle(\.min)?\.js["']>/g, function () {
+          CDNLinksChanged++;
+          return '<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.bundle.min.js">';
+        }),
+      )
+      // JSDelivr Bundle JS
+      .pipe(
+        replace(/<script src=["']https:\/\/cdn\.jsdelivr\.net\/npm\/bootstrap@3\.\d+\.\d+\/dist\/js\/bootstrap\.bundle(\.min)?\.js["']>/g, function () {
+          CDNLinksChanged++;
+          return '<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js">';
+        }),
+      )
+      // Stackpath Bundle JS
+      .pipe(
+        replace(/<script src=["']https:\/\/stackpath\.bootstrapcdn\.com\/bootstrap\/3\.\d+\.\d+\/js\/bootstrap\.bundle(\.min)?\.js["']>/g, function () {
+          CDNLinksChanged++;
+          return '<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js">';
+        }),
+      )
+      // UNPKG Bundle JS
+      .pipe(
+        replace(/<script src=["']https:\/\/unpkg\.com\/bootstrap\/3\.\d+\.\d+\/js\/bootstrap\.bundle(\.min)?\.js["']>/g, function () {
+          CDNLinksChanged++;
+          return '<script src="https://unpkg.com/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js">';
+        }),
+      )
+      // inputConverter
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bcontrol-label\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'form-control-label' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\btext-help\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'form-control-feedback' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bhelp-block\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'form-text' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bform-group-sm\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'form-control-sm' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bform-group-lg\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'form-control-lg' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bform-control\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          if (match.includes('.hasClass(\'input-lg\')')) {
+            return match.replace(/form-control/g, 'form-control-lg');
+          } else if (match.includes('.hasClass(\'input-sm\')')) {
+            return match.replace(/form-control/g, 'form-control-sm');
+          } else {
+            return match;
+          }
+        }),
+      )
+      // hideConverter
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bhidden-xs\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'd-none' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bhidden-sm\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'd-sm-none' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bhidden-md\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'd-md-none' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bhidden-lg\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'd-lg-none' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bvisible-xs\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'd-block d-sm-none' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bvisible-sm\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'd-block d-md-none' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bvisible-md\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'd-block d-lg-none' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bvisible-lg\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'd-block d-xl-none' + p2;
+        }),
+      )
+      // imageConverter
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bimg-responsive\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'img-fluid' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bimg-rounded\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'rounded' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bimg-circle\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'rounded-circle' + p2;
+        }),
+      )
+      // buttonsConverter
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bbtn-default\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'btn-secondary' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bbtn-xs\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'btn-sm' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bbtn-group-xs\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'btn-group-sm' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bdivider\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'dropdown-divider' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bbadge-pill\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'badge' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\blabel\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'badge' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\blabel-default\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'badge-secondary' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\blabel-primary\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'badge-primary' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\blabel-success\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'badge-success' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\blabel-info\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'badge-info' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\blabel-warning\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'badge-warning' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\blabel-danger\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'badge-danger' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<li[^>]*class\s*=\s*['"][^'"]*)\bbreadcrumb\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'breadcrumb-item' + p2;
+        }),
+      )
+      // listLiConverter
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\blist-inline\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return match.replace(/<li[^>]*>/g, function (subMatch, p1, p2) {
+            return subMatch.replace(/(<[^>]*class\s*=\s*['"][^'"]*)\b\b([^'"]*['"])/g, function (innerMatch, p1, p2) {
+              return p1 + 'list-inline-item' + p2;
+            });
+          });
+        }),
+      )
+      // paginationConverter
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bpagination\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return match.replace(/<li[^>]*>/g, function (subMatch, p1, p2) {
+            return subMatch.replace(/<a[^>]*>/g, function (innerMatch, p1, p2) {
+              return innerMatch.replace(/(<[^>]*class\s*=\s*['"][^'"]*)\b\b([^'"]*['"])/g, function (innerMatch, p1, p2) {
+                return p1 + 'page-link' + p2;
+              });
+            });
+          });
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bpagination\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return match.replace(/<li[^>]*>/g, function (subMatch) {
+            return subMatch.replace(/(<[^>]*class\s*=\s*['"][^'"]*)\b\b([^'"]*['"])/g, function (innerMatch, p1, p2) {
+              return p1 + 'page-item' + p2;
+            });
+          });
+        }),
+      )
+      // carouselConverter
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bcarousel-inner\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return match.replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bitem\b([^'"]*['"])/g, function (subMatch, p1, p2) {
+            return p1 + 'carousel-item' + p2;
+          });
+        }),
+      )
+      // pullConverter
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bpull-right\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'float-right' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bpull-left\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'float-left' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bcenter-block\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'mx-auto' + p2;
+        }),
+      )
+      // wellConverter
+      // $('.well').each(function () {
+      //   var card = $("<div class='card'></div>");
+      //   card.append("<div class='card-body'></div>");
+      //   card.children('.card-body').append($(this).html());
+      //   $(this).after(card);
+      //   $(this).remove();
+      // });
+      // $('.thumbnail').each(function () {
+      //   var card = $("<div class='card'></div>");
+      //   card.append("<div class='card-body'></div>");
+      //   card.children('.card-body').append($(this).html());
+      //   $(this).after(card);
+      //   $(this).remove();
+      // });
+      // blockquoteConverter
+      // $('blockquote').each(function () {
+      //   var classes = $(this).attr("class");
+      //   var div = $("<div class='blockquote " + classes + "'></div>");
+      //   div.append($(this).html());
+      //   $(this).after(div);
+      //   $(this).remove();
+      // });
+
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bblockquote-reverse\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'text-right' + p2;
+        }),
+      )
+      // dropdownConverter
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bdropdown-menu\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return match.replace(/<li[^>]*>/g, function (subMatch, p1, p2) {
+            return subMatch.replace(/<a[^>]*>/g, function (innerMatch, p1, p2) {
+              return innerMatch.replace(/(<[^>]*class\s*=\s*['"][^'"]*)\b\b([^'"]*['"])/g, function (innerMatch, p1, p2) {
+                return p1 + 'dropdown-item' + p2;
+              });
+            });
+          });
+        }),
+      )
+      //  $('.dropdown-menu > li').each(function () {
+      //    var aContent = $(this).html();
+      //    $(this).after(aContent);
+      //    $(this).remove();
+      //  });
+      // inConverter
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bin\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'show' + p2;
+        }),
+      )
+      // tableConverter
+      .pipe(
+        replace(/(<(td|tr)[^>]*class\s*=\s*['"][^'"]*)\bactive\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'table-active' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<(td|tr)[^>]*class\s*=\s*['"][^'"]*)\bsuccess\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'table-success' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<(td|tr)[^>]*class\s*=\s*['"][^'"]*)\binfo\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'table-info' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<(td|tr)[^>]*class\s*=\s*['"][^'"]*)\bwarning\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'table-warning' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<(td|tr)[^>]*class\s*=\s*['"][^'"]*)\bdanger\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'table-danger' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<table[^>]*class\s*=\s*['"][^'"]*)\btable-condesed\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'table-sm' + p2;
+        }),
+      )
+      // navbarConverter
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bnavbar\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return match.replace(/<li[^>]*>/g, function (subMatch, p1, p2) {
+            return subMatch.replace(/<a[^>]*>/g, function (innerMatch, p1, p2) {
+              return innerMatch.replace(/(<[^>]*class\s*=\s*['"][^'"]*)\b\b([^'"]*['"])/g, function (innerMatch, p1, p2) {
+                return p1 + 'nav-link' + p2;
+              });
+            });
+          });
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bnavbar\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return match.replace(/<li[^>]*>/g, function (subMatch) {
+            return subMatch.replace(/(<[^>]*class\s*=\s*['"][^'"]*)\b\b([^'"]*['"])/g, function (innerMatch, p1, p2) {
+              return p1 + 'nav-intem' + p2;
+            });
+          });
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bnavbar-btn\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'nav-item' + p2;
+        }),
+      )
+      // .pipe(
+      //   replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bnavbar-nav\b([^'"]*['"])/g, function (match, p1, p2) {
+      //     cssClassChanged++;
+      //     return match.replace(/navbar-right/g, '').replace(/nav/g, '').replace(/navbar-nav/g, function (subMatch, p1, p2) {
+      //       return p1 + 'ml-auto' + p2;
+      //     });
+      //   }),
+      // )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bnavbar-toggle\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return match.replace(/navbar-toggler-right/g, function (subMatch, p1, p2) {
+            return p1 + 'ml-auto' + p2;
+          });
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bnavbar-nav\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return match.replace(/<li[^>]*>/g, function (subMatch, p1, p2) {
+            return subMatch.replace(/<a[^>]*>/g, function (innerMatch, p1, p2) {
+              return innerMatch.replace(/(<[^>]*class\s*=\s*['"][^'"]*)\b\b([^'"]*['"])/g, function (innerMatch, p1, p2) {
+                return p1 + 'nav-link' + p2;
+              });
+            });
+          });
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bnavbar-nav\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return match.replace(/<li[^>]*>/g, function (subMatch) {
+            return subMatch.replace(/(<[^>]*class\s*=\s*['"][^'"]*)\b\b([^'"]*['"])/g, function (innerMatch, p1, p2) {
+              return p1 + 'nav-item' + p2;
+            });
+          });
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bnavbar-nav\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return match.replace(/<a[^>]*>/g, function (subMatch) {
+            return subMatch.replace(/(<[^>]*class\s*=\s*['"][^'"]*)\b\b([^'"]*['"])/g, function (innerMatch, p1, p2) {
+              return p1 + 'navbar-brand' + p2;
+            });
+          });
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bnavbar-fixed-top\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'fixed-top' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bnavbar-toggle\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'navbar-toggler' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bnav-stacked\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'flex-column' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bnavbar\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'navbar-expand-lg' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bnavbar-toggle\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'navbar-expand-md' + p2;
+        }),
+      )
+      // applyFilterBS4
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\btitle\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'card-title' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bdescription\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'card-description' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bcategory\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'card-category' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bpanel-danger\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'card bg-danger text-white' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bpanel-warning\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'card bg-warning' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bpanel-info\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'card bg-info text-white' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bpanel-success\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'card bg-success text-white' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bpanel-primary\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'card bg-primary text-white' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bpanel-footer\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'card-footer' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bpanel-body\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'card-body' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bpanel-title\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'card-title' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bpanel-heading\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'card-header' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bpanel\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'card' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bpage-header\b([^'"]*['"])/g, (match, p1, p2) => {
+          cssClassChanged++;
+          return p1 + p2; // 移除 page-header
+        })
+      )
+      // 按鈕類別替換
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bbtn-default\b([^'"]*['"])/g, (match, p1, p2) => {
+          cssClassChanged++;
+          return p1 + 'btn-secondary' + p2; // btn-default 改為 btn-secondary
+        })
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bbtn-xs\b([^'"]*['"])/g, (match, p1, p2) => {
+          cssClassChanged++;
+          return p1 + p2; // 移除 btn-xs
+        })
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bbtn-group-xs\b([^'"]*['"])/g, (match, p1, p2) => {
+          cssClassChanged++;
+          return p1 + p2; // 移除 btn-group-xs
+        })
+      )
+      // Navbar
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bnavbar-form\b([^'"]*['"])/g, (match, p1, p2) => {
+          cssClassChanged++;
+          return p1 + p2; // 移除 navbar-form
+        })
+      )
+      // 圖片類別替換
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bimg-responsive\b([^'"]*['"])/g, (match, p1, p2) => {
+          cssClassChanged++;
+          return p1 + 'img-fluid' + p2; // img-responsive 改為 img-fluid
+        })
+      )
+      // 分頁類別替換
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bprevious\b([^'"]*['"])/g, (match, p1, p2) => {
+          cssClassChanged++;
+          return p1 + 'pager-prev' + p2; // previous 改為 pager-prev
+        })
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bnext\b([^'"]*['"])/g, (match, p1, p2) => {
+          cssClassChanged++;
+          return p1 + 'pager-next' + p2; // next 改為 pager-next
+        })
+      )
+      // 表格類別替換
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\btable-condensed\b([^'"]*['"])/g, (match, p1, p2) => {
+          cssClassChanged++;
+          return p1 + 'table-sm' + p2; // table-condensed 改為 table-sm
+        })
+      )
+      // 面板、縮略圖和井的替換
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bpanel\b([^'"]*['"])/g, (match, p1, p2) => {
+          cssClassChanged++;
+          return p1 + 'card' + p2; // panel 改為 card
+        })
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bwell\b([^'"]*['"])/g, (match, p1, p2) => {
+          cssClassChanged++;
+          return p1 + 'card' + p2; // well 改為 card
+        })
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bthumbnail\b([^'"]*['"])/g, (match, p1, p2) => {
+          cssClassChanged++;
+          return p1 + 'card' + p2; // thumbnail 改為 card
+        })
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bpanel-heading\b([^'"]*['"])/g, (match, p1, p2) => {
+          cssClassChanged++;
+          return p1 + 'card-header' + p2; // panel-heading 改為 card-header
+        })
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bpanel-title\b([^'"]*['"])/g, (match, p1, p2) => {
+          cssClassChanged++;
+          return p1 + 'card-title' + p2; // panel-title 改為 card-title
+        })
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bpanel-body\b([^'"]*['"])/g, (match, p1, p2) => {
+          cssClassChanged++;
+          return p1 + 'card-body' + p2; // panel-body 改為 card-body
+        })
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bpanel-footer\b([^'"]*['"])/g, (match, p1, p2) => {
+          cssClassChanged++;
+          return p1 + 'card-footer' + p2; // panel-footer 改為 card-footer
+        })
+      )
+      // 旋轉木馬
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\b item \b([^'"]*['"])/g, (match, p1, p2) => {
+          cssClassChanged++;
+          return p1 + ' carousel-item ' + p2; // item 改為 carousel-item
+        })
+      )
+      // 實用工具類別替換
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bpull-left\b([^'"]*['"])/g, (match, p1, p2) => {
+          cssClassChanged++;
+          return p1 + p2; // 移除 pull-left
+        })
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bpull-right\b([^'"]*['"])/g, (match, p1, p2) => {
+          cssClassChanged++;
+          return p1 + p2; // 移除 pull-right
+        })
+      )
+      // 響應式實用工具類別替換
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bhidden-xs\b([^'"]*['"])/g, (match, p1, p2) => {
+          cssClassChanged++;
+          return p1 + 'hidden-xs-up' + p2; // hidden-xs 改為 hidden-xs-up
+        })
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bhidden-sm\b([^'"]*['"])/g, (match, p1, p2) => {
+          cssClassChanged++;
+          return p1 + 'hidden-sm-up' + p2; // hidden-sm 改為 hidden-sm-up
+        })
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bhidden-md\b([^'"]*['"])/g, (match, p1, p2) => {
+          cssClassChanged++;
+          return p1 + 'hidden-md-up' + p2; // hidden-md 改為 hidden-md-up
+        })
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bhidden-lg\b([^'"]*['"])/g, (match, p1, p2) => {
+          cssClassChanged++;
+          return p1 + 'hidden-lg-up' + p2; // hidden-lg 改為 hidden-lg-up
+        })
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bnavbar-default\b([^'"]*['"])/g, (match, p1, p2) => {
+          cssClassChanged++;
+          return p1 + 'navbar navbar-light bg-light' + p2; // navbar-default 改為 navbar navbar-light bg-light
+        })
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bimg-rounded\b([^'"]*['"])/g, (match, p1, p2) => {
+          cssClassChanged++;
+          return p1 + 'img-fluid' + p2; // img-rounded 改為 img-fluid
+        })
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bprogress-bar-info\b([^'"]*['"])/g, (match, p1, p2) => {
+          cssClassChanged++;
+          return p1 + 'bg-info' + p2; // progress-bar-info 改為 bg-info
+        })
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bprogress-bar-warning\b([^'"]*['"])/g, (match, p1, p2) => {
+          cssClassChanged++;
+          return p1 + 'bg-warning' + p2; // progress-bar-warning 改為 bg-warning
+        })
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bprogress-bar-danger\b([^'"]*['"])/g, (match, p1, p2) => {
+          cssClassChanged++;
+          return p1 + 'bg-danger' + p2; // progress-bar-danger 改為 bg-danger
+        })
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bmedia-object\b([^'"]*['"])/g, (match, p1, p2) => {
+          cssClassChanged++;
+          return p1 + 'media-img' + p2; // media-object 改為 media-img
+        })
+      )
+      .pipe(dest(options.dest))
+      .on('data', (data) => {
+        if (options.verbose) {
+          console.log(`Wrote file: ${data.path}`);
+        }
+      })
+      .on('end', function () {
+        console.log(`Completed! Changed ${cssClassChanged} CSS class names, ${dataAttrChanged} data-attributes and ${CDNLinksChanged} CDN links.`);
+        cb();
+      })
+  );
+}
+
 async function migrate(cb) {
   const options = parseArgs();
 
@@ -31,6 +874,16 @@ async function migrate(cb) {
   return (
     /** when overwrite flag is true, set base option */
     src([`${options.src}/${options.defaultFileGlob}`], { base: options.overwrite ? './' : undefined })
+      // MaxCDN CSS
+      .pipe(
+        replace(
+          /<link href=["']https:\/\/maxcdn\.bootstrapcdn\.com\/bootstrap\/4\.\d+\.\d+\/css\/bootstrap(\.min)?\.css["'] rel=["']stylesheet["'] ?\/?>/g,
+          function () {
+            CDNLinksChanged++;
+            return '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">';
+          },
+        ),
+      )
       // CDNJS CSS
       .pipe(
         replace(
@@ -60,6 +913,13 @@ async function migrate(cb) {
         replace(/<link href=["']https:\/\/unpkg\.com\/bootstrap\/4\.\d+\.\d+\/css\/bootstrap(\.min)?\.css["'] rel=["']stylesheet["'] ?\/?>/g, function () {
           CDNLinksChanged++;
           return '<link href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css">';
+        }),
+      )
+      // MaxCDN JS
+      .pipe(
+        replace(/<link href=["']https:\/\/maxcdn\.bootstrapcdn\.com\/bootstrap\/4\.\d+\.\d+\/js\/bootstrap(\.min)?\.js["']*>/g, function () {
+          CDNLinksChanged++;
+          return '<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js">';
         }),
       )
       // CDNJS JS
@@ -700,9 +1560,147 @@ async function migrate(cb) {
           return p1 + 'collapse-horizontal' + p2;
         }),
       )
-      .pipe(replace(/<select([^>]*)\bclass=['"]([^'"]*)form-control(-lg|-sm)?([^'"]*)['"]([^>]*)>/g, '<select$1class="$2form-select$3$4"$5>'))
-      .pipe(replace(/<select([^>]*)\bclass=['"]([^'"]*)form-control\b([^'"]*['"])/g, '<select$1class="$2form-select$3'))
+      // .pipe(replace(/<select([^>]*)\bclass=['"]([^'"]*)form-control(-lg|-sm)?([^'"]*)['"]([^>]*)>/g, '<select$1class="$2form-select$3$4"$5>'))
+      // .pipe(replace(/<select([^>]*)\bclass=['"]([^'"]*)form-control\b([^'"]*['"])/g, '<select$1class="$2form-select$3'))
       .pipe(replace('<span aria-hidden="true">&times;</span>', ''))
+      .pipe(dest(options.dest))
+      .on('data', (data) => {
+        if (options.verbose) {
+          console.log(`Wrote file: ${data.path}`);
+        }
+      })
+      .on('end', function () {
+        console.log(`Completed! Changed ${cssClassChanged} CSS class names, ${dataAttrChanged} data-attributes and ${CDNLinksChanged} CDN links.`);
+        cb();
+      })
+  );
+}
+
+async function migrate4to3(cb) {
+  const options = parseArgs();
+
+  console.log(options);
+  let dataAttrChanged = 0;
+  let CDNLinksChanged = 0;
+  let cssClassChanged = 0;
+
+  return (
+    src([`${options.src}/${options.defaultFileGlob}`], { base: options.overwrite ? './' : undefined })
+      // CDN Links
+      .pipe(
+        replace(
+          /<link href=["']https:\/\/maxcdn\.bootstrapcdn\.com\/bootstrap\/4\.\d+\.\d+\/css\/bootstrap(\.min)?\.css["'] rel=["']stylesheet["'] ?\/?>/g,
+          function () {
+            CDNLinksChanged++;
+            return '<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">';
+          },
+        ),
+      )
+      // 其他 CDN 替換...
+      // CSS 類別替換
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bform-control-label\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'control-label' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bform-text\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'text-help' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bcard\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'panel' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bcard-header\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'panel-heading' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bcard-body\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'panel-body' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bcard-footer\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'panel-footer' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bbtn-secondary\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'btn-default' + p2;
+        }),
+      )
+      // 其他類別替換...
+      .pipe(dest(options.dest))
+      .on('data', (data) => {
+        if (options.verbose) {
+          console.log(`Wrote file: ${data.path}`);
+        }
+      })
+      .on('end', function () {
+        console.log(`Completed! Changed ${cssClassChanged} CSS class names, ${dataAttrChanged} data-attributes and ${CDNLinksChanged} CDN links.`);
+        cb();
+      })
+  );
+}
+
+async function migrate5to4(cb) {
+  const options = parseArgs();
+
+  console.log(options);
+  let dataAttrChanged = 0;
+  let CDNLinksChanged = 0;
+  let cssClassChanged = 0;
+
+  return (
+    src([`${options.src}/${options.defaultFileGlob}`], { base: options.overwrite ? './' : undefined })
+      // CDN Links
+      .pipe(
+        replace(
+          /<link href=["']https:\/\/maxcdn\.bootstrapcdn\.com\/bootstrap\/5\.\d+\.\d+\/css\/bootstrap(\.min)?\.css["'] rel=["']stylesheet["'] ?\/?>/g,
+          function () {
+            CDNLinksChanged++;
+            return '<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.6.2/css/bootstrap.min.css" rel="stylesheet">';
+          },
+        ),
+      )
+      // 其他 CDN 替換...
+      // CSS 類別替換
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bnavbar-light\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'navbar-default' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bbg-light\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'navbar-default' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bform-control\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'input' + p2;
+        }),
+      )
+      .pipe(
+        replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bimg-fluid\b([^'"]*['"])/g, function (match, p1, p2) {
+          cssClassChanged++;
+          return p1 + 'img-responsive' + p2;
+        }),
+      )
+      // 其他類別替換...
       .pipe(dest(options.dest))
       .on('data', (data) => {
         if (options.verbose) {
@@ -757,3 +1755,6 @@ function parseArgs() {
 }
 
 exports.migrate = migrate;
+exports.migrate3to4 = migrate3to4;
+exports.migrate4to3 = migrate4to3;
+exports.migrate5to4 = migrate5to4;
