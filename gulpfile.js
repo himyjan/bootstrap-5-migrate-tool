@@ -18,6 +18,188 @@ const DEFAULT_OPTIONS = {
   defaultFileGlob: '**/*.{asp,aspx,cshtml,gohtml,gotmpl,ejs,erb,hbs,html,htm,js,jsp,php,ts,twig,vue}',
 };
 
+const BS3_CDN_CSS = 'https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css';
+const BS3_CDN_JS = 'https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js';
+const BS4_CDN_CSS = 'https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css';
+const BS4_CDN_JS = 'https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js';
+const BS4_CDN_BUNDLE = 'https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js';
+const BS5_CDN_CSS = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css';
+const BS5_CDN_JS = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js';
+const BS5_CDN_BUNDLE = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js';
+
+/** Official Bootstrap 3 <-> 4 class renames. Each pair is unique so 3to4 and 4to3 are inverses. */
+function buildBs3ToBs4ClassMap() {
+  const map = [
+    ['alert-dismissable', 'alert-dismissible'],
+    ['btn-default', 'btn-secondary'],
+    ['btn-xs', 'btn-sm'],
+    ['btn-group-xs', 'btn-group-sm'],
+    ['img-responsive', 'img-fluid'],
+    ['img-rounded', 'rounded'],
+    ['img-circle', 'rounded-circle'],
+    ['pull-left', 'float-left'],
+    ['pull-right', 'float-right'],
+    ['center-block', 'mx-auto'],
+    ['hidden-print', 'd-print-none'],
+    ['visible-print-block', 'd-print-block'],
+    ['visible-print-inline', 'd-print-inline'],
+    ['visible-print-inline-block', 'd-print-inline-block'],
+    ['hidden-xs', 'd-none d-sm-block'],
+    ['hidden-sm', 'd-sm-none d-md-block'],
+    ['hidden-md', 'd-md-none d-lg-block'],
+    ['hidden-lg', 'd-lg-none d-xl-block'],
+    ['visible-xs-inline-block', 'd-inline-block d-sm-none'],
+    ['visible-sm-inline-block', 'd-none d-sm-inline-block d-md-none'],
+    ['visible-md-inline-block', 'd-none d-md-inline-block d-lg-none'],
+    ['visible-lg-inline-block', 'd-none d-lg-inline-block d-xl-none'],
+    ['visible-xs-inline', 'd-inline d-sm-none'],
+    ['visible-sm-inline', 'd-none d-sm-inline d-md-none'],
+    ['visible-md-inline', 'd-none d-md-inline d-lg-none'],
+    ['visible-lg-inline', 'd-none d-lg-inline d-xl-none'],
+    ['visible-xs', 'd-block d-sm-none'],
+    ['visible-sm', 'd-none d-sm-block d-md-none'],
+    ['visible-md', 'd-none d-md-block d-lg-none'],
+    ['visible-lg', 'd-none d-lg-block d-xl-none'],
+    ['navbar-default', 'navbar-light'],
+    ['navbar-inverse', 'navbar-dark'],
+    ['navbar-toggle', 'navbar-toggler'],
+    ['navbar-fixed-top', 'fixed-top'],
+    ['navbar-fixed-bottom', 'fixed-bottom'],
+    ['navbar-static-top', 'sticky-top'],
+    ['navbar-form', 'form-inline'],
+    ['navbar-left', 'mr-auto'],
+    ['navbar-right', 'ml-auto'],
+    ['label-default', 'badge-secondary'],
+    ['label-primary', 'badge-primary'],
+    ['label-success', 'badge-success'],
+    ['label-info', 'badge-info'],
+    ['label-warning', 'badge-warning'],
+    ['label-danger', 'badge-danger'],
+    ['label', 'badge'],
+    ['panel-heading', 'card-header'],
+    ['panel-title', 'card-title'],
+    ['panel-body', 'card-body'],
+    ['panel-footer', 'card-footer'],
+    ['panel-group', 'accordion'],
+    ['panel', 'card'],
+    ['divider', 'dropdown-divider'],
+    ['table-condensed', 'table-sm'],
+    ['control-label', 'col-form-label'],
+    ['input-lg', 'form-control-lg'],
+    ['input-sm', 'form-control-sm'],
+    ['help-block', 'form-text'],
+    ['form-control-static', 'form-control-plaintext'],
+    ['has-error', 'is-invalid'],
+    ['has-success', 'is-valid'],
+    ['checkbox-inline', 'form-check-inline'],
+    ['checkbox', 'form-check'],
+    ['input-group-addon', 'input-group-text'],
+    ['input-group-btn', 'input-group-append'],
+    ['left carousel-control', 'carousel-control-prev'],
+    ['right carousel-control', 'carousel-control-next'],
+    ['icon-prev', 'carousel-control-prev-icon'],
+    ['icon-next', 'carousel-control-next-icon'],
+    ['item', 'carousel-item'],
+    ['fade in', 'fade show'],
+    ['in', 'show'],
+    ['progress-bar-striped active', 'progress-bar-striped progress-bar-animated'],
+  ];
+
+  for (let i = 1; i <= 12; i++) {
+    map.push([`col-xs-${i}`, `col-${i}`]);
+    map.push([`col-xs-offset-${i}`, `offset-${i}`]);
+    map.push([`col-sm-offset-${i}`, `offset-sm-${i}`]);
+    map.push([`col-md-offset-${i}`, `offset-md-${i}`]);
+    map.push([`col-lg-offset-${i}`, `offset-lg-${i}`]);
+  }
+
+  return map;
+}
+
+const BS3_TO_BS4_CLASS_MAP = buildBs3ToBs4ClassMap();
+
+function tokenCount(value) {
+  return value.trim().split(/\s+/).filter(Boolean).length;
+}
+
+function sortedClassPairs(direction) {
+  const pairs = BS3_TO_BS4_CLASS_MAP.map(([from, to]) => (direction === 'to4' ? [from, to] : [to, from]));
+  return pairs.sort((a, b) => {
+    const tokenDiff = tokenCount(b[0]) - tokenCount(a[0]);
+    if (tokenDiff !== 0) {
+      return tokenDiff;
+    }
+    return b[0].length - a[0].length;
+  });
+}
+
+function findTokenGroup(tokens, parts) {
+  const used = new Set();
+  const indexes = [];
+  for (const part of parts) {
+    const idx = tokens.findIndex((token, i) => token === part && !used.has(i));
+    if (idx === -1) {
+      return null;
+    }
+    used.add(idx);
+    indexes.push(idx);
+  }
+  return indexes;
+}
+
+function applyClassMap(classValue, pairs) {
+  let tokens = classValue.trim().split(/\s+/).filter(Boolean);
+  if (!tokens.length) {
+    return { value: classValue, count: 0 };
+  }
+
+  let count = 0;
+  for (const [from, to] of pairs) {
+    const fromParts = from.trim().split(/\s+/).filter(Boolean);
+    const toParts = to.trim().split(/\s+/).filter(Boolean);
+    let found = findTokenGroup(tokens, fromParts);
+    while (found) {
+      const insertAt = Math.min(...found);
+      const insertPos = tokens.filter((_, i) => i < insertAt && !found.includes(i)).length;
+      tokens = tokens.filter((_, i) => !found.includes(i));
+      tokens.splice(insertPos, 0, ...toParts);
+      count++;
+      found = findTokenGroup(tokens, fromParts);
+    }
+  }
+
+  return { value: tokens.join(' '), count };
+}
+
+function replaceBootstrapCdn(content, fromMajor, cssUrl, jsUrl, bundleUrl, onCdnChange) {
+  const major = String(fromMajor);
+  const patterns = [
+    [new RegExp(`https://cdn\\.jsdelivr\\.net/npm/bootstrap@${major}\\.\\d+\\.\\d+/dist/css/bootstrap(\\.min)?\\.css`, 'g'), cssUrl],
+    [new RegExp(`https://cdn\\.jsdelivr\\.net/npm/bootstrap@${major}\\.\\d+\\.\\d+/dist/js/bootstrap\\.bundle(\\.min)?\\.js`, 'g'), bundleUrl],
+    [new RegExp(`https://cdn\\.jsdelivr\\.net/npm/bootstrap@${major}\\.\\d+\\.\\d+/dist/js/bootstrap(\\.min)?\\.js`, 'g'), jsUrl],
+    [new RegExp(`https://stackpath\\.bootstrapcdn\\.com/bootstrap/${major}\\.\\d+\\.\\d+/css/bootstrap(\\.min)?\\.css`, 'g'), cssUrl],
+    [new RegExp(`https://stackpath\\.bootstrapcdn\\.com/bootstrap/${major}\\.\\d+\\.\\d+/js/bootstrap\\.bundle(\\.min)?\\.js`, 'g'), bundleUrl],
+    [new RegExp(`https://stackpath\\.bootstrapcdn\\.com/bootstrap/${major}\\.\\d+\\.\\d+/js/bootstrap(\\.min)?\\.js`, 'g'), jsUrl],
+    [new RegExp(`https://maxcdn\\.bootstrapcdn\\.com/bootstrap/${major}\\.\\d+\\.\\d+/css/bootstrap(\\.min)?\\.css`, 'g'), cssUrl],
+    [new RegExp(`https://maxcdn\\.bootstrapcdn\\.com/bootstrap/${major}\\.\\d+\\.\\d+/js/bootstrap(\\.min)?\\.js`, 'g'), jsUrl],
+    [new RegExp(`https://cdnjs\\.cloudflare\\.com/ajax/libs/(?:twitter-bootstrap|bootstrap)/${major}\\.\\d+\\.\\d+/(?:dist/)?css/bootstrap(\\.min)?\\.css`, 'g'), cssUrl],
+    [new RegExp(`https://cdnjs\\.cloudflare\\.com/ajax/libs/(?:twitter-bootstrap|bootstrap)/${major}\\.\\d+\\.\\d+/(?:dist/)?js/bootstrap\\.bundle(\\.min)?\\.js`, 'g'), bundleUrl],
+    [new RegExp(`https://cdnjs\\.cloudflare\\.com/ajax/libs/(?:twitter-bootstrap|bootstrap)/${major}\\.\\d+\\.\\d+/(?:dist/)?js/bootstrap(\\.min)?\\.js`, 'g'), jsUrl],
+    [new RegExp(`https://unpkg\\.com/bootstrap[@/]${major}\\.\\d+\\.\\d+/(?:dist/)?css/bootstrap(\\.min)?\\.css`, 'g'), cssUrl],
+    [new RegExp(`https://unpkg\\.com/bootstrap[@/]${major}\\.\\d+\\.\\d+/(?:dist/)?js/bootstrap\\.bundle(\\.min)?\\.js`, 'g'), bundleUrl],
+    [new RegExp(`https://unpkg\\.com/bootstrap[@/]${major}\\.\\d+\\.\\d+/(?:dist/)?js/bootstrap(\\.min)?\\.js`, 'g'), jsUrl],
+  ];
+
+  let next = content;
+  for (const [pattern, url] of patterns) {
+    next = next.replace(pattern, function () {
+      onCdnChange();
+      return url;
+    });
+  }
+  return next;
+}
+
 async function migrate(cb) {
   const options = parseArgs();
 
@@ -27,95 +209,17 @@ async function migrate(cb) {
   let dataAttrChanged = 0;
   let CDNLinksChanged = 0;
   let cssClassChanged = 0;
+  // const classPairs = sortedClassPairs('to5');
 
   return (
     /** when overwrite flag is true, set base option */
     src([`${options.src}/${options.defaultFileGlob}`], { base: options.overwrite ? './' : undefined })
-      // CDNJS CSS
       .pipe(
-        replace(/(href=["'])(https:\/\/cdnjs\.cloudflare\.com\/ajax\/libs\/bootstrap\/4\.\d+\.\d+\/dist\/css\/bootstrap(\.min)?\.css)(["'])/g, function (match, p1, p2, p3, p4) {
-          CDNLinksChanged++;
-          return p1 + 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/css/bootstrap.min.css' + p4;
-        }),
-      )
-      // JSDelivr CSS
-      .pipe(
-        replace(/(href=["'])(https:\/\/cdn\.jsdelivr\.net\/npm\/bootstrap@4\.\d+\.\d+\/dist\/css\/bootstrap(\.min)?\.css)(["'])/g, function (match, p1, p2, p3, p4) {
-          CDNLinksChanged++;
-          return p1 + 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css' + p4;
-        }),
-      )
-      // Stackpath CSS
-      .pipe(
-        replace(/(href=["'])(https:\/\/stackpath\.bootstrapcdn\.com\/bootstrap\/4\.\d+\.\d+\/css\/bootstrap(\.min)?\.css)(["'])/g, function (match, p1, p2, p3, p4) {
-          CDNLinksChanged++;
-          return p1 + 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css' + p4;
-        }),
-      )
-      // UNPKG CSS
-      .pipe(
-        replace(/(href=["'])(https:\/\/unpkg\.com\/bootstrap\/4\.\d+\.\d+\/css\/bootstrap(\.min)?\.css)(["'])/g, function (match, p1, p2, p3, p4) {
-          CDNLinksChanged++;
-          return p1 + 'https://unpkg.com/bootstrap@5.3.8/dist/css/bootstrap.min.css' + p4;
-        }),
-      )
-      // CDNJS JS
-      .pipe(
-        replace(/(src=["'])(https:\/\/cdnjs\.cloudflare\.com\/ajax\/libs\/bootstrap\/4\.\d+\.\d+\/dist\/js\/bootstrap(\.min)?\.js)(["'])/g, function (match, p1, p2, p3, p4) {
-          CDNLinksChanged++;
-          return p1 + 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/js/bootstrap.min.js' + p4;
-        }),
-      )
-      // JSDelivr JS
-      .pipe(
-        replace(/(src=["'])(https:\/\/cdn\.jsdelivr\.net\/npm\/bootstrap@4\.\d+\.\d+\/dist\/js\/bootstrap(\.min)?\.js)(["'])/g, function (match, p1, p2, p3, p4) {
-          CDNLinksChanged++;
-          return p1 + 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js' + p4;
-        }),
-      )
-      // Stackpath JS
-      .pipe(
-        replace(/(src=["'])(https:\/\/stackpath\.bootstrapcdn\.com\/bootstrap\/4\.\d+\.\d+\/js\/bootstrap(\.min)?\.js)(["'])/g, function (match, p1, p2, p3, p4) {
-          CDNLinksChanged++;
-          return p1 + 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js' + p4;
-        }),
-      )
-      // UNPKG JS
-      .pipe(
-        replace(/(src=["'])(https:\/\/unpkg\.com\/bootstrap\/4\.\d+\.\d+\/js\/bootstrap(\.min)?\.js)(["'])/g, function (match, p1, p2, p3, p4) {
-          CDNLinksChanged++;
-          return p1 + 'https://unpkg.com/bootstrap@5.3.8/dist/js/bootstrap.min.js' + p4;
-        }),
-      )
-      // CDNJS Bundle JS
-      .pipe(
-        replace(
-          /(src=["'])(https:\/\/cdnjs\.cloudflare\.com\/ajax\/libs\/bootstrap\/4\.\d+\.\d+\/dist\/js\/bootstrap\.bundle(\.min)?\.js)(["'])/g,
-          function (match, p1, p2, p3, p4) {
+        replace(/[\s\S]+/, function (content) {
+          const withCdn = replaceBootstrapCdn(content, 4, BS5_CDN_CSS, BS5_CDN_JS, BS5_CDN_BUNDLE, function () {
             CDNLinksChanged++;
-            return p1 + 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/js/bootstrap.bundle.min.js' + p4;
-          },
-        ),
-      )
-      // JSDelivr Bundle JS
-      .pipe(
-        replace(/(src=["'])(https:\/\/cdn\.jsdelivr\.net\/npm\/bootstrap@4\.\d+\.\d+\/dist\/js\/bootstrap\.bundle(\.min)?\.js)(["'])/g, function (match, p1, p2, p3, p4) {
-          CDNLinksChanged++;
-          return p1 + 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js' + p4;
-        }),
-      )
-      // Stackpath Bundle JS
-      .pipe(
-        replace(/(src=["'])(https:\/\/stackpath\.bootstrapcdn\.com\/bootstrap\/4\.\d+\.\d+\/js\/bootstrap\.bundle(\.min)?\.js)(["'])/g, function (match, p1, p2, p3, p4) {
-          CDNLinksChanged++;
-          return p1 + 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js' + p4;
-        }),
-      )
-      // UNPKG Bundle JS
-      .pipe(
-        replace(/(src=["'])(https:\/\/unpkg\.com\/bootstrap\/4\.\d+\.\d+\/js\/bootstrap\.bundle(\.min)?\.js)(["'])/g, function (match, p1, p2, p3, p4) {
-          CDNLinksChanged++;
-          return p1 + 'https://unpkg.com/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js' + p4;
+          });
+          return withCdn;
         }),
       )
       .pipe(
@@ -716,6 +820,270 @@ async function migrate(cb) {
   );
 }
 
+async function migrate5to4(cb) {
+  const options = parseArgs();
+
+  console.log(options);
+  let dataAttrChanged = 0;
+  let CDNLinksChanged = 0;
+  let cssClassChanged = 0;
+  // const classPairs = sortedClassPairs('to4');
+
+  return src([`${options.src}/${options.defaultFileGlob}`], { base: options.overwrite ? './' : undefined })
+    .pipe(
+      replace(/[\s\S]+/, function (content) {
+        const withCdn = replaceBootstrapCdn(content, 5, BS4_CDN_CSS, BS4_CDN_JS, BS4_CDN_BUNDLE, function () {
+          CDNLinksChanged++;
+        });
+        return withCdn
+      }),
+    )
+    .pipe(
+      replace(/\sdata-bs-([a-z0-9-]+)=/g, function (match, p1) {
+        dataAttrChanged++;
+        return ` data-${p1}=`;
+      }),
+    )
+    .pipe(
+      replace(/(<[^>]*class\s*=\s*['"][^'"]*)\b(?:badge\s+)?(?:rounded-pill\s+)?(?:badge\s+)?(?:rounded-pill\s+)?text-bg-primary\b([^'"]*['"])/g, function (match, p1, p2) {
+        cssClassChanged++;
+        return p1 + 'badge badge-primary' + p2;
+      }),
+    )
+    .pipe(
+      replace(/(<[^>]*class\s*=\s*['"][^'"]*)\b(?:badge\s+)?(?:rounded-pill\s+)?text-bg-secondary\b([^'"]*['"])/g, function (match, p1, p2) {
+        cssClassChanged++;
+        return p1 + 'badge badge-secondary' + p2;
+      }),
+    )
+    .pipe(
+      replace(/(<[^>]*class\s*=\s*['"][^'"]*)\b(?:badge\s+)?(?:rounded-pill\s+)?text-bg-success\b([^'"]*['"])/g, function (match, p1, p2) {
+        cssClassChanged++;
+        return p1 + 'badge badge-success' + p2;
+      }),
+    )
+    .pipe(
+      replace(/(<[^>]*class\s*=\s*['"][^'"]*)\b(?:badge\s+)?(?:rounded-pill\s+)?text-bg-danger\b([^'"]*['"])/g, function (match, p1, p2) {
+        cssClassChanged++;
+        return p1 + 'badge badge-danger' + p2;
+      }),
+    )
+    .pipe(
+      replace(/(<[^>]*class\s*=\s*['"][^'"]*)\b(?:badge\s+)?(?:rounded-pill\s+)?text-bg-warning\b([^'"]*['"])/g, function (match, p1, p2) {
+        cssClassChanged++;
+        return p1 + 'badge badge-warning' + p2;
+      }),
+    )
+    .pipe(
+      replace(/(<[^>]*class\s*=\s*['"][^'"]*)\b(?:badge\s+)?(?:rounded-pill\s+)?text-bg-info\b([^'"]*['"])/g, function (match, p1, p2) {
+        cssClassChanged++;
+        return p1 + 'badge badge-info' + p2;
+      }),
+    )
+    .pipe(
+      replace(/(<[^>]*class\s*=\s*['"][^'"]*)\b(?:badge\s+)?(?:rounded-pill\s+)?text-bg-light\b([^'"]*['"])/g, function (match, p1, p2) {
+        cssClassChanged++;
+        return p1 + 'badge badge-light' + p2;
+      }),
+    )
+    .pipe(
+      replace(/(<[^>]*class\s*=\s*['"][^'"]*)\b(?:badge\s+)?(?:rounded-pill\s+)?text-bg-dark\b([^'"]*['"])/g, function (match, p1, p2) {
+        cssClassChanged++;
+        return p1 + 'badge badge-dark' + p2;
+      }),
+    )
+    .pipe(
+      replace(/(<[^>]*class\s*=\s*['"][^'"]*)\b(?:badge\s+)?rounded-pill\b([^'"]*['"])/g, function (match, p1, p2) {
+        cssClassChanged++;
+        return p1 + 'badge-pill' + p2;
+      }),
+    )
+    .pipe(
+      replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bform-check-input\b([^'"]*['"])/g, function (match, p1, p2) {
+        cssClassChanged++;
+        return p1 + 'custom-control-input' + p2;
+      }),
+    )
+    .pipe(
+      replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bform-check-label\b([^'"]*['"])/g, function (match, p1, p2) {
+        cssClassChanged++;
+        return p1 + 'custom-control-label' + p2;
+      }),
+    )
+    .pipe(
+      replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bform-check\b([^'"]*['"])/g, function (match, p1, p2) {
+        cssClassChanged++;
+        return p1 + 'custom-control custom-checkbox' + p2;
+      }),
+    )
+    .pipe(
+      replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bform-select\b([^'"]*['"])/g, function (match, p1, p2) {
+        cssClassChanged++;
+        return p1 + 'custom-select' + p2;
+      }),
+    )
+    .pipe(
+      replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bform-range\b([^'"]*['"])/g, function (match, p1, p2) {
+        cssClassChanged++;
+        return p1 + 'custom-range' + p2;
+      }),
+    )
+    .pipe(
+      replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bbtn-close\b([^'"]*['"])/g, function (match, p1, p2) {
+        cssClassChanged++;
+        return p1 + 'close' + p2;
+      }),
+    )
+    .pipe(
+      replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bfloat-start\b([^'"]*['"])/g, function (match, p1, p2) {
+        cssClassChanged++;
+        return p1 + 'float-left' + p2;
+      }),
+    )
+    .pipe(
+      replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bfloat-end\b([^'"]*['"])/g, function (match, p1, p2) {
+        cssClassChanged++;
+        return p1 + 'float-right' + p2;
+      }),
+    )
+    .pipe(
+      replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bvisually-hidden\b([^'"]*['"])/g, function (match, p1, p2) {
+        cssClassChanged++;
+        return p1 + 'sr-only' + p2;
+      }),
+    )
+    .pipe(
+      replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bcarousel-control-pager-next\b([^'"]*['"])/g, function (match, p1, p2) {
+        cssClassChanged++;
+        return p1 + 'carousel-control-next' + p2;
+      }),
+    )
+    .pipe(
+      replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bcarousel-control-pager-prev\b([^'"]*['"])/g, function (match, p1, p2) {
+        cssClassChanged++;
+        return p1 + 'carousel-control-prev' + p2;
+      }),
+    )
+    .pipe(
+      replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bbadge\s+badge\b([^'"]*['"])/g, function (match, p1, p2) {
+        cssClassChanged++;
+        return p1.trimEnd() + p2;
+      }),
+    )
+    .pipe(
+      replace(/(<[^>]*class\s*=\s*['"][^'"]*)\bbadge\s+badge-pill\b([^'"]*['"])/g, function (match, p1, p2) {
+        cssClassChanged++;
+        return p1.trimEnd() + p2;
+      }),
+    )
+    .pipe(
+      replace(/(<[^>]*class\s*=\s*['"][^'"]*)\b(?:btn\s+)+btn-default\b([^'"]*['"])/g, function (match, p1, p2) {
+        cssClassChanged++;
+        return p1 + 'btn btn-default' + p2;
+      }),
+    )
+    .pipe(
+      replace(/(<[^>]*class\s*=\s*['"][^'"]*)\b(?:custom-select\s+)+custom-select\b([^'"]*['"])/g, function (match, p1, p2) {
+        cssClassChanged++;
+        return p1 + 'custom-select' + p2;
+      }),
+    )
+    .pipe(
+      replace(/(<[^>]*class\s*=\s*['"][^'"]*)\b(?:sr-only\s+)+sr-only\b([^'"]*['"])/g, function (match, p1, p2) {
+        cssClassChanged++;
+        return p1 + 'sr-only' + p2;
+      }),
+    )
+    .pipe(
+      replace(/data-bs-([a-z0-9-]+)/g, function (match, p1) {
+        dataAttrChanged++;
+        return `data-${p1}`;
+      }),
+    )
+    .pipe(dest(options.dest))
+    .on('data', (data) => {
+      if (options.verbose) {
+        console.log(`Wrote file: ${data.path}`);
+      }
+    })
+    .on('end', function () {
+      console.log(`Completed! Changed ${cssClassChanged} CSS class names, ${dataAttrChanged} data-attributes and ${CDNLinksChanged} CDN links.`);
+      cb();
+    });
+}
+
+async function migrate3to4(cb) {
+  const options = parseArgs();
+
+  console.log(options);
+  let dataAttrChanged = 0;
+  let CDNLinksChanged = 0;
+  let cssClassChanged = 0;
+  const classPairs = sortedClassPairs('to4');
+
+  return (
+    src([`${options.src}/${options.defaultFileGlob}`], { base: options.overwrite ? './' : undefined })
+      .pipe(
+        replace(/[\s\S]+/, function (content) {
+          const withCdn = replaceBootstrapCdn(content, 3, BS4_CDN_CSS, BS4_CDN_JS, BS4_CDN_BUNDLE, function () {
+            CDNLinksChanged++;
+          });
+          return withCdn.replace(/(<[^>]*\bclass\s*=\s*['"])([^'"]*)(['"])/g, function (match, p1, classValue, p3) {
+            const result = applyClassMap(classValue, classPairs);
+            cssClassChanged += result.count;
+            return p1 + result.value + p3;
+          });
+        }),
+      )
+      .pipe(dest(options.dest))
+      .on('data', function (data) {
+        if (options.verbose) {
+          console.log(`Wrote file: ${data.path}`);
+        }
+      })
+      .on('end', function () {
+        console.log(`Completed! Changed ${cssClassChanged} CSS class names, ${dataAttrChanged} data-attributes and ${CDNLinksChanged} CDN links.`);
+        cb();
+      })
+  );
+}
+
+async function migrate4to3(cb) {
+  const options = parseArgs();
+
+  console.log(options);
+  let dataAttrChanged = 0;
+  let CDNLinksChanged = 0;
+  let cssClassChanged = 0;
+  const classPairs = sortedClassPairs('to3');
+
+  return (
+    src([`${options.src}/${options.defaultFileGlob}`], { base: options.overwrite ? './' : undefined })
+      .pipe(
+        replace(/[\s\S]+/, function (content) {
+          const withCdn = replaceBootstrapCdn(content, 4, BS3_CDN_CSS, BS3_CDN_JS, BS3_CDN_JS, function () {
+            CDNLinksChanged++;
+          });
+          return withCdn.replace(/(<[^>]*\bclass\s*=\s*['"])([^'"]*)(['"])/g, function (match, p1, classValue, p3) {
+            const result = applyClassMap(classValue, classPairs);
+            cssClassChanged += result.count;
+            return p1 + result.value + p3;
+          });
+        }),
+      )
+      .pipe(dest(options.dest))
+      .on('data', function (data) {
+        if (options.verbose) {
+          console.log(`Wrote file: ${data.path}`);
+        }
+      })
+      .on('end', function () {
+        console.log(`Completed! Changed ${cssClassChanged} CSS class names, ${dataAttrChanged} data-attributes and ${CDNLinksChanged} CDN links.`);
+        cb();
+      })
+  );
+}
+
 /** parses cli args array and return an options object */
 function parseArgs() {
   const options = Object.assign({}, DEFAULT_OPTIONS);
@@ -757,3 +1125,6 @@ function parseArgs() {
 }
 
 exports.migrate = migrate;
+exports.migrate3to4 = migrate3to4;
+exports.migrate4to3 = migrate4to3;
+exports.migrate5to4 = migrate5to4;

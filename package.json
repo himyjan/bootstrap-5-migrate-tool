@@ -19,14 +19,23 @@
   "main": "gulpfile.js",
   "scripts": {
     "start": "gulp migrate --src ./src --dest ./dest",
+    "start3to4": "gulp migrate3to4 --src ./src3to4 --dest ./dest",
+    "start4to3": "gulp migrate4to3 --src ./src4to3 --dest ./dest",
+    "start5to4": "gulp migrate5to4 --src ./src5to4 --dest ./dest",
     "htmlhint": "npx htmlhint **/*.html",
-    "lint": "npx eslint@8.57.1 *.js --fix",
-    "prettier": "npx prettier@3.9.6 --write \"**/*.{html,js,json,md,yml}\"",
+    "lint": "eslint \"*.js\" --fix",
+    "prettier": "prettier --write \"**/*.{js,md,yml,json}\" --ignore-path .prettierignore",
     "test": "npm run lint && npm run prettier && npm run start"
   },
   "dependencies": {
-    "gulp": "5.0.1",
-    "gulp-replace": "1.1.4"
+    "gulp": "^5.0.1",
+    "gulp-replace": "^1.1.4"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.11.0",
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "^3.9.8"
   },
   "files": [
     "gulpfile.js"
