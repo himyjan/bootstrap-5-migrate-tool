@@ -10,7 +10,10 @@
     "jsdelivr",
     "npmjs",
     "Oliff",
-    "viewports"
+    "ossf",
+    "SARIF",
+    "viewports",
+    "ZIZMOR"
   ],
   "language": "en,en-US",
   "allowCompoundWords": true,

@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/coliff/bootstrap-5-migrate-tool.git"
+    "url": "https://github.com/coliff/bootstrap-5-migrate-tool.git"
   },
   "funding": {
     "type": "github",
@@ -21,11 +21,11 @@
     "start": "gulp migrate --src ./src --dest ./dest",
     "htmlhint": "npx htmlhint **/*.html",
     "lint": "npx eslint@8.57.1 *.js --fix",
-    "prettier": "npx prettier@3 --write \"**/*.{html,js,md,yml}\"",
+    "prettier": "npx prettier@3.9.6 --write \"**/*.{html,js,json,md,yml}\"",
     "test": "npm run lint && npm run prettier && npm run start"
   },
   "dependencies": {
-    "gulp": "5.0.0",
+    "gulp": "5.0.1",
     "gulp-replace": "1.1.4"
   },
   "files": [
@@ -42,6 +42,6 @@
     }
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   }
 }
