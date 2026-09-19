@@ -4,14 +4,15 @@
 [![GitHub Super-Linter](https://github.com/coliff/bootstrap-5-migrate-tool/workflows/Lint%20Code%20Base/badge.svg)](https://github.com/marketplace/actions/super-linter)
 [![GitHub stars image](https://img.shields.io/github/stars/coliff/bootstrap-5-migrate-tool.svg?label=GitHub%20Stars)](https://github.com/coliff/bootstrap-5-migrate-tool)
 
-A command-line script designed to help you upgrade your Bootstrap 4 projects to Bootstrap 5. It uses gulp with gulp-replace to replace class names within your folder of HTML pages/templates.
+A command-line script designed to help you upgrade your Bootstrap 3 projects to Bootstrap 4 or Bootstrap 4 projects to Bootstrap 5. It uses gulp with gulp-replace to replace class names within your folder of HTML pages/templates.
 
 ## Features
 
 - Replaces all the Bootstrap 4 class names with the renamed Bootstrap 5 class names
+- Replaces all the Bootstrap 3 class names with the renamed Bootstrap 4 class names
 - Replaces deprecated components (such as `.jumbotron` and `.media`) with utility classes
 - Renames all the data attributes (such as `data-toggle` and `data-target`) to the new names
-- Updates all Bootstrap v4 CDN links (cloudflare, jsdelivr, stackpath.bootstrapcdn.com and unpkg) to latest version of Bootstrap v5
+- Updates all Bootstrap v3 v4 CDN links (cloudflare, jsdelivr, stackpath.bootstrapcdn.com and unpkg) to latest version of Bootstrap v5
 - Options to overwrite the existing files in place or save the migrated files to a different folder
 - Can convert not only HTML files but also ASP, CSHTML, EJS, ERB, HBS, JSP, PHP, VUE, and other template files
 - Provides a summary of the changes made
