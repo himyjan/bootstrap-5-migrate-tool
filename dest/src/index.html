@@ -265,7 +265,7 @@
             <div class="col-sm-3 my-1">
               <label class="visually-hidden" for="inlineFormInputGroupUsername">Username</label>
               <div class="input-group">
-                <div class="input-group-prepend">
+                <div>
                   <div class="input-group-text">@</div>
                 </div>
                 <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Username" />
@@ -395,7 +395,7 @@
         </div>
 
         <div class="my-3">
-          <div class="custom-file">
+          <div>
             <label class="form-label" for="customFile">Choose file</label>
             <input type="file" class="form-control" id="customFile" />
           </div>
@@ -404,7 +404,7 @@
         <h4 class="h5 mt-4 mb-3" id="input-group">Input Group</h4>
 
         <div class="input-group mb-3">
-          <div class="input-group-prepend">
+          <div>
             <span class="input-group-text" id="basic-addon1">@</span>
           </div>
           <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" />
@@ -412,7 +412,7 @@
 
         <div class="input-group mb-3">
           <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2" />
-          <div class="input-group-append">
+          <div>
             <span class="input-group-text" id="basic-addon2">@example.com</span>
           </div>
         </div>
@@ -659,7 +659,7 @@
         <div class="mb-5">
           <!-- 16:9 aspect ratio -->
           <div class="ratio ratio-16x9">
-            <iframe class="" src="https://example.com" aria-label="Example iframe"></iframe>
+            <iframe src="https://example.com" aria-label="Example iframe"></iframe>
           </div>
         </div>
 
@@ -696,7 +696,176 @@
             </p>
           </div>
         </div>
-      </main>
+      <!-- migration-coverage:start -->
+        <h2 class="mt-5" id="migration-coverage">Migration coverage</h2>
+        <p class="lead">
+          This page uses Bootstrap 4 class names. Every class name, data attribute and CDN link that the migrate tool updates when it migrates this page is listed below. The name is shown as text and applied to the element.
+        </p>
+
+        <h3 class="h4">Class names</h3>
+        <div class="bs-component">
+          <p class="small">
+            <code class="text-bg-danger">badge-danger</code>
+            <code class="text-bg-dark">badge-dark</code>
+            <code class="text-bg-info">badge-info</code>
+            <code class="text-bg-light">badge-light</code>
+            <code class="rounded-pill">badge-pill</code>
+            <code class="text-bg-primary">badge-primary</code>
+            <code class="text-bg-secondary">badge-secondary</code>
+            <code class="text-bg-success">badge-success</code>
+            <code class="text-bg-warning">badge-warning</code>
+            <code class="border-start">border-left</code>
+            <code class="border-start-0">border-left-0</code>
+            <code class="border-end">border-right</code>
+            <code class="border-end-0">border-right-0</code>
+            <code class="d-grid">btn-block</code>
+            <code>card-columns</code>
+            <code>card-deck</code>
+            <code class="btn-close">close</code>
+            <code class="form-check">custom-control custom-checkbox</code>
+            <code class="form-check">custom-control custom-radio</code>
+            <code class="form-check form-switch">custom-control custom-switch</code>
+            <code class="form-check-input">custom-control-input</code>
+            <code class="form-check-label">custom-control-label</code>
+            <code>custom-file</code>
+            <code class="form-control">custom-file-input</code>
+            <code class="form-label">custom-file-label</code>
+            <code class="form-range">custom-range</code>
+            <code class="form-select">custom-select</code>
+            <code class="form-select-lg">custom-select-lg</code>
+            <code class="form-select-sm">custom-select-sm</code>
+            <code class="dropdown-menu-start">dropdown-menu-left</code>
+            <code class="dropdown-menu-lg-start">dropdown-menu-lg-left</code>
+            <code class="dropdown-menu-lg-end">dropdown-menu-lg-right</code>
+            <code class="dropdown-menu-md-start">dropdown-menu-md-left</code>
+            <code class="dropdown-menu-md-end">dropdown-menu-md-right</code>
+            <code class="dropdown-menu-end">dropdown-menu-right</code>
+            <code class="dropdown-menu-sm-start">dropdown-menu-sm-left</code>
+            <code class="dropdown-menu-sm-end">dropdown-menu-sm-right</code>
+            <code class="dropdown-menu-xl-start">dropdown-menu-xl-left</code>
+            <code class="dropdown-menu-xl-end">dropdown-menu-xl-right</code>
+            <code class="dropstart">dropleft</code>
+            <code class="dropend">dropright</code>
+            <code class="ratio">embed-responsive</code>
+            <code class="ratio-16x9">embed-responsive-16by9</code>
+            <code class="ratio-1x1">embed-responsive-1by1</code>
+            <code class="ratio-21x9">embed-responsive-21by9</code>
+            <code class="ratio-4x3">embed-responsive-4by3</code>
+            <code>embed-responsive-item</code>
+            <code class="float-start">float-left</code>
+            <code class="float-lg-start">float-lg-left</code>
+            <code class="float-lg-end">float-lg-right</code>
+            <code class="float-md-start">float-md-left</code>
+            <code class="float-md-end">float-md-right</code>
+            <code class="float-end">float-right</code>
+            <code class="float-sm-start">float-sm-left</code>
+            <code class="float-sm-end">float-sm-right</code>
+            <code class="float-xl-start">float-xl-left</code>
+            <code class="float-xl-end">float-xl-right</code>
+            <code class="fst-italic">font-italic</code>
+            <code class="fw-bold">font-weight-bold</code>
+            <code class="fw-bolder">font-weight-bolder</code>
+            <code class="fw-light">font-weight-light</code>
+            <code class="fw-lighter">font-weight-lighter</code>
+            <code class="fw-normal">font-weight-normal</code>
+            <code class="form-control">form-control-file</code>
+            <code class="form-range">form-control-range</code>
+            <code class="mb-3">form-group</code>
+            <code class="d-flex align-items-center">form-inline</code>
+            <code class="row">form-row</code>
+            <code>input-group-append</code>
+            <code>input-group-prepend</code>
+            <code class="bg-light mb-4 rounded-2 py-5 px-3">jumbotron</code>
+            <code class="rounded-0 px-0">jumbotron-fluid</code>
+            <code class="d-flex">media</code>
+            <code class="flex-grow-1">media-body</code>
+            <code class="ms-3">ml-3</code>
+            <code class="me-3">mr-3</code>
+            <code class="g-0">no-gutters</code>
+            <code class="ps-3">pl-3</code>
+            <code class="pe-3">pr-3</code>
+            <code class="overflow-y-scroll">pre-scrollable</code>
+            <code class="rounded-start">rounded-left</code>
+            <code class="rounded-3">rounded-lg</code>
+            <code class="rounded-end">rounded-right</code>
+            <code class="rounded-1">rounded-sm</code>
+            <code class="visually-hidden">sr-only</code>
+            <code class="visually-hidden-focusable">sr-only sr-only-focusable</code>
+            <code class="visually-hidden-focusable">sr-only-focusable</code>
+            <code class="d-none">text-hide</code>
+            <code>text-justify</code>
+            <code class="text-start">text-left</code>
+            <code class="text-lg-start">text-lg-left</code>
+            <code class="text-lg-end">text-lg-right</code>
+            <code class="text-md-start">text-md-left</code>
+            <code class="text-md-end">text-md-right</code>
+            <code class="font-monospace">text-monospace</code>
+            <code class="text-end">text-right</code>
+            <code class="text-sm-start">text-sm-left</code>
+            <code class="text-sm-end">text-sm-right</code>
+            <code class="text-xl-start">text-xl-left</code>
+            <code class="text-xl-end">text-xl-right</code>
+            <code class="table-dark">thead-dark</code>
+            <code class="table-light">thead-light</code>
+            <code class="collapse-horizontal">width</code>
+          </p>
+        </div>
+
+        <h3 class="h4">Data attributes</h3>
+        <div class="bs-component">
+          <p class="small">
+            <code data-bs-animation="example">data-animation</code>
+            <code data-bs-autohide="example">data-autohide</code>
+            <code data-bs-backdrop="example">data-backdrop</code>
+            <code data-bs-boundary="example">data-boundary</code>
+            <code data-bs-container="example">data-container</code>
+            <code data-bs-content="example">data-content</code>
+            <code data-bs-custom-class="example">data-custom-class</code>
+            <code data-bs-delay="example">data-delay</code>
+            <code data-bs-dismiss="example">data-dismiss</code>
+            <code data-bs-display="example">data-display</code>
+            <code data-bs-html="example">data-html</code>
+            <code data-bs-interval="example">data-interval</code>
+            <code data-bs-keyboard="example">data-keyboard</code>
+            <code data-bs-method="example">data-method</code>
+            <code data-bs-offset="example">data-offset</code>
+            <code data-bs-parent="example">data-parent</code>
+            <code data-bs-pause="example">data-pause</code>
+            <code data-bs-placement="example">data-placement</code>
+            <code data-bs-popper-config="example">data-popper-config</code>
+            <code data-bs-reference="example">data-reference</code>
+            <code data-bs-ride="example">data-ride</code>
+            <code data-bs-selector="example">data-selector</code>
+            <code data-bs-slide="example">data-slide</code>
+            <code data-bs-slide-to="example">data-slide-to</code>
+            <code data-bs-spy="example">data-spy</code>
+            <code data-bs-target="example">data-target</code>
+            <code data-bs-template="example">data-template</code>
+            <code data-bs-title="example">data-title</code>
+            <code data-bs-toggle="example">data-toggle</code>
+            <code data-bs-touch="example">data-touch</code>
+            <code data-bs-trigger="example">data-trigger</code>
+            <code data-bs-wrap="example">data-wrap</code>
+          </p>
+        </div>
+
+        <h3 class="h4">CDN links</h3>
+        <div class="bs-component">
+          <p class="small">
+            <code>https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css</code>
+            <code>https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.bundle.min.js</code>
+            <code>https://unpkg.com/bootstrap@4/dist/css/bootstrap.min.css</code>
+            <code>https://unpkg.com/bootstrap/4/dist/js/bootstrap.bundle.min.js</code>
+            <code>https://stackpath.bootstrapcdn.com/bootstrap/4/css/bootstrap.min.css</code>
+            <code>https://stackpath.bootstrapcdn.com/bootstrap/4/js/bootstrap.bundle.min.js</code>
+            <code>https://maxcdn.bootstrapcdn.com/bootstrap/4/css/bootstrap.min.css</code>
+            <code>https://maxcdn.bootstrapcdn.com/bootstrap/4/js/bootstrap.min.js</code>
+            <code>https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4/css/bootstrap.min.css</code>
+            <code>https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4/js/bootstrap.bundle.min.js</code>
+          </p>
+        </div>
+<!-- migration-coverage:end -->
+</main>
     </div>
   </div>
 
@@ -1008,7 +1177,7 @@
         </div>
         <div class="col-lg-5">
           <p class="bs-component">
-            <button type="button" class="btn btn-primary btn-lg btn-block">Block level button</button>
+            <button type="button" class="btn btn-primary btn-lg d-grid">Block level button</button>
           </p>
 
           <div class="bs-component mb-3">
@@ -1366,26 +1535,26 @@
           <form class="bs-component">
             <div class="mb-3">
               <fieldset disabled>
-                <label class="control-label" for="disabledInput">Disabled input</label>
+                <label class="col-form-label" for="disabledInput">Disabled input</label>
                 <input class="form-control" id="disabledInput" type="text" placeholder="Disabled input here..." disabled>
               </fieldset>
             </div>
 
             <div class="mb-3">
               <fieldset>
-                <label class="control-label" for="readOnlyInput">Readonly input</label>
+                <label class="col-form-label" for="readOnlyInput">Readonly input</label>
                 <input class="form-control" id="readOnlyInput" type="text" placeholder="Readonly input here..." readonly>
               </fieldset>
             </div>
 
-            <div class="mb-3 has-success">
-              <label class="form-control-label" for="inputValid">Valid input</label>
+            <div class="mb-3">
+              <label class="col-form-label" for="inputValid">Valid input</label>
               <input type="text" value="correct value" class="form-control is-valid" id="inputValid">
               <div class="valid-feedback">Success! You've done it.</div>
             </div>
 
-            <div class="mb-3 has-danger">
-              <label class="form-control-label" for="inputInvalid">Invalid input</label>
+            <div class="mb-3">
+              <label class="col-form-label" for="inputInvalid">Invalid input</label>
               <input type="text" value="wrong value" class="form-control is-invalid" id="inputInvalid">
               <div class="invalid-feedback">Sorry, that username's taken. Try another?</div>
             </div>
@@ -1406,14 +1575,14 @@
             </div>
 
             <div class="mb-3">
-              <label class="control-label">Input addons</label>
+              <label class="col-form-label">Input addons</label>
               <div class="mb-3">
                 <div class="input-group mb-3">
-                  <div class="input-group-prepend">
+                  <div>
                     <span class="input-group-text">$</span>
                   </div>
                   <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-                  <div class="input-group-append">
+                  <div>
                     <span class="input-group-text">.00</span>
                   </div>
                 </div>
@@ -1468,11 +1637,11 @@
               </div>
               <div class="mb-3">
                 <div class="input-group mb-3">
-                  <div class="custom-file">
+                  <div>
                     <input type="file" class="form-control" id="inputGroupFile02">
                     <label class="form-label" for="inputGroupFile02">Choose file</label>
                   </div>
-                  <div class="input-group-append">
+                  <div>
                     <span class="input-group-text">Upload</span>
                   </div>
                 </div>
@@ -2174,7 +2343,7 @@
               <div class="toast-header">
                 <strong class="me-auto">Bootstrap</strong>
                 <small>11 mins ago</small>
-                <button type="button" class="ms-2 mb-1 close" data-bs-dismiss="toast" aria-label="Close">
+                <button type="button" class="ms-2 mb-1 btn-close" data-bs-dismiss="toast" aria-label="Close">
                   
                 </button>
               </div>

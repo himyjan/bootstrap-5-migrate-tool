@@ -265,7 +265,7 @@
             <div class="col-sm-3 my-1">
               <label class="visually-hidden" for="inlineFormInputGroupUsername">Username</label>
               <div class="input-group">
-                <div class="input-group-prepend">
+                <div>
                   <div class="input-group-text">@</div>
                 </div>
                 <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Username" />
@@ -395,7 +395,7 @@
         </div>
 
         <div class="my-3">
-          <div class="custom-file">
+          <div>
             <label class="form-label" for="customFile">Choose file</label>
             <input type="file" class="form-control" id="customFile" />
           </div>
@@ -404,7 +404,7 @@
         <h4 class="h5 mt-4 mb-3" id="input-group">Input Group</h4>
 
         <div class="input-group mb-3">
-          <div class="input-group-prepend">
+          <div>
             <span class="input-group-text" id="basic-addon1">@</span>
           </div>
           <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" />
@@ -412,7 +412,7 @@
 
         <div class="input-group mb-3">
           <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2" />
-          <div class="input-group-append">
+          <div>
             <span class="input-group-text" id="basic-addon2">@example.com</span>
           </div>
         </div>
@@ -431,7 +431,7 @@
               <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-
+                  
                 </button>
               </div>
               <div class="modal-body">...</div>
@@ -563,7 +563,7 @@
 
         <div class="ms-1 float-start mb-5">
           <button type="button" class="btn-close" aria-label="Close">
-
+            
           </button>
         </div>
 
@@ -659,7 +659,7 @@
         <div class="mb-5">
           <!-- 16:9 aspect ratio -->
           <div class="ratio ratio-16x9">
-            <iframe class="" src="https://example.com" aria-label="Example iframe"></iframe>
+            <iframe src="https://example.com" aria-label="Example iframe"></iframe>
           </div>
         </div>
 
@@ -696,7 +696,165 @@
             </p>
           </div>
         </div>
-      </main>
+      <!-- migration-coverage:start -->
+        <h2 class="mt-5" id="migration-coverage">Migration coverage</h2>
+        <p class="lead">
+          This page uses Bootstrap 5 class names. Every class name, data attribute and CDN link that the migrate tool updates when it migrates this page is listed below. The name is shown as text and applied to the element.
+        </p>
+
+        <h3 class="h4">Class names</h3>
+        <div class="bs-component">
+          <p class="small">
+            <code class="bg-light mb-4 rounded-2 py-5 px-3">bg-light mb-4 rounded-2 py-5 px-3</code>
+            <code class="border-end">border-end</code>
+            <code class="border-end-0">border-end-0</code>
+            <code class="border-start">border-start</code>
+            <code class="border-start-0">border-start-0</code>
+            <code class="btn-close">btn-close</code>
+            <code class="collapse-horizontal">collapse-horizontal</code>
+            <code class="d-flex">d-flex</code>
+            <code class="d-flex align-items-center">d-flex align-items-center</code>
+            <code class="d-grid">d-grid</code>
+            <code class="d-none">d-none</code>
+            <code class="dropdown-menu-end">dropdown-menu-end</code>
+            <code class="dropdown-menu-lg-end">dropdown-menu-lg-end</code>
+            <code class="dropdown-menu-lg-start">dropdown-menu-lg-start</code>
+            <code class="dropdown-menu-md-end">dropdown-menu-md-end</code>
+            <code class="dropdown-menu-md-start">dropdown-menu-md-start</code>
+            <code class="dropdown-menu-sm-end">dropdown-menu-sm-end</code>
+            <code class="dropdown-menu-sm-start">dropdown-menu-sm-start</code>
+            <code class="dropdown-menu-start">dropdown-menu-start</code>
+            <code class="dropdown-menu-xl-end">dropdown-menu-xl-end</code>
+            <code class="dropdown-menu-xl-start">dropdown-menu-xl-start</code>
+            <code class="dropend">dropend</code>
+            <code class="dropstart">dropstart</code>
+            <code class="flex-grow-1">flex-grow-1</code>
+            <code class="float-end">float-end</code>
+            <code class="float-lg-end">float-lg-end</code>
+            <code class="float-lg-start">float-lg-start</code>
+            <code class="float-md-end">float-md-end</code>
+            <code class="float-md-start">float-md-start</code>
+            <code class="float-sm-end">float-sm-end</code>
+            <code class="float-sm-start">float-sm-start</code>
+            <code class="float-start">float-start</code>
+            <code class="float-xl-end">float-xl-end</code>
+            <code class="float-xl-start">float-xl-start</code>
+            <code class="font-monospace">font-monospace</code>
+            <code class="form-check">form-check</code>
+            <code class="form-check form-switch">form-check form-switch</code>
+            <code class="form-check-input">form-check-input</code>
+            <code class="form-check-label">form-check-label</code>
+            <code class="form-control">form-control</code>
+            <code class="form-label">form-label</code>
+            <code class="form-range">form-range</code>
+            <code class="form-select">form-select</code>
+            <code class="form-select-lg">form-select-lg</code>
+            <code class="form-select-sm">form-select-sm</code>
+            <code class="fst-italic">fst-italic</code>
+            <code class="fw-bold">fw-bold</code>
+            <code class="fw-bolder">fw-bolder</code>
+            <code class="fw-light">fw-light</code>
+            <code class="fw-lighter">fw-lighter</code>
+            <code class="fw-normal">fw-normal</code>
+            <code class="g-0">g-0</code>
+            <code class="mb-3">mb-3</code>
+            <code class="me-3">me-3</code>
+            <code class="ms-3">ms-3</code>
+            <code class="overflow-y-scroll">overflow-y-scroll</code>
+            <code class="pe-3">pe-3</code>
+            <code class="ps-3">ps-3</code>
+            <code class="ratio">ratio</code>
+            <code class="ratio-16x9">ratio-16x9</code>
+            <code class="ratio-1x1">ratio-1x1</code>
+            <code class="ratio-21x9">ratio-21x9</code>
+            <code class="ratio-4x3">ratio-4x3</code>
+            <code class="rounded-0 px-0">rounded-0 px-0</code>
+            <code class="rounded-1">rounded-1</code>
+            <code class="rounded-3">rounded-3</code>
+            <code class="rounded-end">rounded-end</code>
+            <code class="rounded-pill">rounded-pill</code>
+            <code class="rounded-start">rounded-start</code>
+            <code class="row">row</code>
+            <code class="table-dark">table-dark</code>
+            <code class="table-light">table-light</code>
+            <code class="text-bg-danger">text-bg-danger</code>
+            <code class="text-bg-dark">text-bg-dark</code>
+            <code class="text-bg-info">text-bg-info</code>
+            <code class="text-bg-light">text-bg-light</code>
+            <code class="text-bg-primary">text-bg-primary</code>
+            <code class="text-bg-secondary">text-bg-secondary</code>
+            <code class="text-bg-success">text-bg-success</code>
+            <code class="text-bg-warning">text-bg-warning</code>
+            <code class="text-end">text-end</code>
+            <code class="text-lg-end">text-lg-end</code>
+            <code class="text-lg-start">text-lg-start</code>
+            <code class="text-md-end">text-md-end</code>
+            <code class="text-md-start">text-md-start</code>
+            <code class="text-sm-end">text-sm-end</code>
+            <code class="text-sm-start">text-sm-start</code>
+            <code class="text-start">text-start</code>
+            <code class="text-xl-end">text-xl-end</code>
+            <code class="text-xl-start">text-xl-start</code>
+            <code class="visually-hidden">visually-hidden</code>
+            <code class="visually-hidden-focusable">visually-hidden-focusable</code>
+          </p>
+        </div>
+
+        <h3 class="h4">Data attributes</h3>
+        <div class="bs-component">
+          <p class="small">
+            <code data-bs-animation="example">data-bs-animation</code>
+            <code data-bs-autohide="example">data-bs-autohide</code>
+            <code data-bs-backdrop="example">data-bs-backdrop</code>
+            <code data-bs-boundary="example">data-bs-boundary</code>
+            <code data-bs-container="example">data-bs-container</code>
+            <code data-bs-content="example">data-bs-content</code>
+            <code data-bs-custom-class="example">data-bs-custom-class</code>
+            <code data-bs-delay="example">data-bs-delay</code>
+            <code data-bs-dismiss="example">data-bs-dismiss</code>
+            <code data-bs-display="example">data-bs-display</code>
+            <code data-bs-html="example">data-bs-html</code>
+            <code data-bs-interval="example">data-bs-interval</code>
+            <code data-bs-keyboard="example">data-bs-keyboard</code>
+            <code data-bs-method="example">data-bs-method</code>
+            <code data-bs-offset="example">data-bs-offset</code>
+            <code data-bs-parent="example">data-bs-parent</code>
+            <code data-bs-pause="example">data-bs-pause</code>
+            <code data-bs-placement="example">data-bs-placement</code>
+            <code data-bs-popper-config="example">data-bs-popper-config</code>
+            <code data-bs-reference="example">data-bs-reference</code>
+            <code data-bs-ride="example">data-bs-ride</code>
+            <code data-bs-selector="example">data-bs-selector</code>
+            <code data-bs-slide="example">data-bs-slide</code>
+            <code data-bs-slide-to="example">data-bs-slide-to</code>
+            <code data-bs-spy="example">data-bs-spy</code>
+            <code data-bs-target="example">data-bs-target</code>
+            <code data-bs-template="example">data-bs-template</code>
+            <code data-bs-title="example">data-bs-title</code>
+            <code data-bs-toggle="example">data-bs-toggle</code>
+            <code data-bs-touch="example">data-bs-touch</code>
+            <code data-bs-trigger="example">data-bs-trigger</code>
+            <code data-bs-wrap="example">data-bs-wrap</code>
+          </p>
+        </div>
+
+        <h3 class="h4">CDN links</h3>
+        <div class="bs-component">
+          <p class="small">
+            <code>https://cdn.jsdelivr.net/npm/bootstrap@5/dist/css/bootstrap.min.css</code>
+            <code>https://cdn.jsdelivr.net/npm/bootstrap@5/dist/js/bootstrap.bundle.min.js</code>
+            <code>https://unpkg.com/bootstrap@5/dist/css/bootstrap.min.css</code>
+            <code>https://unpkg.com/bootstrap/5/dist/js/bootstrap.bundle.min.js</code>
+            <code>https://stackpath.bootstrapcdn.com/bootstrap/5/css/bootstrap.min.css</code>
+            <code>https://stackpath.bootstrapcdn.com/bootstrap/5/js/bootstrap.bundle.min.js</code>
+            <code>https://maxcdn.bootstrapcdn.com/bootstrap/5/css/bootstrap.min.css</code>
+            <code>https://maxcdn.bootstrapcdn.com/bootstrap/5/js/bootstrap.min.js</code>
+            <code>https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5/css/bootstrap.min.css</code>
+            <code>https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5/js/bootstrap.bundle.min.js</code>
+          </p>
+        </div>
+<!-- migration-coverage:end -->
+</main>
     </div>
   </div>
 
@@ -1008,7 +1166,7 @@
         </div>
         <div class="col-lg-5">
           <p class="bs-component">
-            <button type="button" class="btn btn-primary btn-lg btn-block">Block level button</button>
+            <button type="button" class="btn btn-primary btn-lg d-grid">Block level button</button>
           </p>
 
           <div class="bs-component mb-3">
@@ -1366,26 +1524,26 @@
           <form class="bs-component">
             <div class="mb-3">
               <fieldset disabled>
-                <label class="control-label" for="disabledInput">Disabled input</label>
+                <label class="col-form-label" for="disabledInput">Disabled input</label>
                 <input class="form-control" id="disabledInput" type="text" placeholder="Disabled input here..." disabled>
               </fieldset>
             </div>
 
             <div class="mb-3">
               <fieldset>
-                <label class="control-label" for="readOnlyInput">Readonly input</label>
+                <label class="col-form-label" for="readOnlyInput">Readonly input</label>
                 <input class="form-control" id="readOnlyInput" type="text" placeholder="Readonly input here..." readonly>
               </fieldset>
             </div>
 
-            <div class="mb-3 has-success">
-              <label class="form-control-label" for="inputValid">Valid input</label>
+            <div class="mb-3">
+              <label class="col-form-label" for="inputValid">Valid input</label>
               <input type="text" value="correct value" class="form-control is-valid" id="inputValid">
               <div class="valid-feedback">Success! You've done it.</div>
             </div>
 
-            <div class="mb-3 has-danger">
-              <label class="form-control-label" for="inputInvalid">Invalid input</label>
+            <div class="mb-3">
+              <label class="col-form-label" for="inputInvalid">Invalid input</label>
               <input type="text" value="wrong value" class="form-control is-invalid" id="inputInvalid">
               <div class="invalid-feedback">Sorry, that username's taken. Try another?</div>
             </div>
@@ -1406,14 +1564,14 @@
             </div>
 
             <div class="mb-3">
-              <label class="control-label">Input addons</label>
+              <label class="col-form-label">Input addons</label>
               <div class="mb-3">
                 <div class="input-group mb-3">
-                  <div class="input-group-prepend">
+                  <div>
                     <span class="input-group-text">$</span>
                   </div>
                   <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-                  <div class="input-group-append">
+                  <div>
                     <span class="input-group-text">.00</span>
                   </div>
                 </div>
@@ -1468,11 +1626,11 @@
               </div>
               <div class="mb-3">
                 <div class="input-group mb-3">
-                  <div class="custom-file">
+                  <div>
                     <input type="file" class="form-control" id="inputGroupFile02">
                     <label class="form-label" for="inputGroupFile02">Choose file</label>
                   </div>
-                  <div class="input-group-append">
+                  <div>
                     <span class="input-group-text">Upload</span>
                   </div>
                 </div>
@@ -2132,7 +2290,7 @@
                   <div class="modal-header">
                     <h5 class="modal-title">Modal title</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-
+                      
                     </button>
                   </div>
                   <div class="modal-body">
@@ -2174,8 +2332,8 @@
               <div class="toast-header">
                 <strong class="me-auto">Bootstrap</strong>
                 <small>11 mins ago</small>
-                <button type="button" class="ms-2 mb-1 close" data-bs-dismiss="toast" aria-label="Close">
-
+                <button type="button" class="ms-2 mb-1 btn-close" data-bs-dismiss="toast" aria-label="Close">
+                  
                 </button>
               </div>
               <div class="toast-body">

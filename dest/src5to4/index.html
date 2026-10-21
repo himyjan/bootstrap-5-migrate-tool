@@ -15,13 +15,13 @@
 
 <body class="container" style="max-width: 992px !important">
   <header class="mb-5 mt-3">
-    <h1 class="fw-normal h2 ms-1 me-1 text-center">Bootstrap 5 Migrate Tool</h1>
+    <h1 class="font-weight-normal h2 ml-1 mr-1 text-center">Bootstrap 5 Migrate Tool</h1>
     <div style="min-height: 60px">
-      <p class="lead text-center ps-sm-5 pe-sm-5 d-none" id="intro-bs4">
+      <p class="lead text-center pl-sm-5 pr-sm-5 d-none" id="intro-bs4">
         This HTML test page uses Bootstrap 4 class names and loads Bootstrap 4 CSS and JavaScript from a CDN.
         <a href="../dest/src/index.html">View the migrated test page</a>.
       </p>
-      <p class="lead text-center ps-sm-5 pe-sm-5 d-none" id="intro-bs5">
+      <p class="lead text-center pl-sm-5 pr-sm-5 d-none" id="intro-bs5">
         This is the migrated HTML test page which now uses Bootstrap 5 class names and loads the latest Bootstrap 5 CSS and JavaScript from a CDN.
         <a href="../../src/index.html">View the original test page</a>.
       </p>
@@ -85,30 +85,30 @@
 
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
           <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         </div>
 
         <h3 class="h4" id="badges">Badges</h3>
 
-        <span class="badge-primary">Primary</span>
-        <span class="badge-secondary">Secondary</span>
-        <span class="badge-success">Success</span>
-        <span class="badge-danger">Danger</span>
-        <span class="badge-warning">Warning</span>
-        <span class="badge-info">Info</span>
-        <span class="badge-light text-dark">Light</span>
-        <span class="badge-dark">Dark</span>
+        <span class="badge badge-primary">Primary</span>
+        <span class="badge badge-secondary">Secondary</span>
+        <span class="badge badge-success">Success</span>
+        <span class="badge badge-danger">Danger</span>
+        <span class="badge badge-warning">Warning</span>
+        <span class="badge badge-info">Info</span>
+        <span class="badge badge-light text-dark">Light</span>
+        <span class="badge badge-dark">Dark</span>
 
         <br /><br />
 
-        <span class="-primary">Primary</span>
-        <span class="-secondary">Secondary</span>
-        <span class="-success">Success</span>
-        <span class="-danger">Danger</span>
-        <span class="-warning">Warning</span>
-        <span class="-info">Info</span>
-        <span class="-light text-dark">Light</span>
-        <span class="-dark">Dark</span>
+        <span class="badge badge-pill badge-primary">Primary</span>
+        <span class="badge badge-pill badge-secondary">Secondary</span>
+        <span class="badge badge-pill badge-success">Success</span>
+        <span class="badge badge-pill badge-danger">Danger</span>
+        <span class="badge badge-pill badge-warning">Warning</span>
+        <span class="badge badge-pill badge-info">Info</span>
+        <span class="badge badge-pill badge-light text-dark">Light</span>
+        <span class="badge badge-pill badge-dark">Dark</span>
 
         <hr class="my-5" />
 
@@ -157,7 +157,7 @@
           </button>
         </p>
         <div style="min-height: 120px">
-          <div class="collapse collapse-horizontal" id="collapseWidthExample">
+          <div class="collapse width" id="collapseWidthExample">
             <div class="card card-body" style="width: 320px">This is some placeholder content for a horizontal collapse. It's hidden by default and shown when triggered.</div>
           </div>
         </div>
@@ -168,7 +168,7 @@
 
         <!-- Default dropright button -->
         <div class="mb-2" style="min-height: 30px">
-          <div class="btn-group dropend">
+          <div class="btn-group dropright">
             <button type="button" class="btn btn-sm btn-secondary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Dropright</button>
             <div class="dropdown-menu">
               <button class="dropdown-item" type="button">Action</button>
@@ -179,7 +179,7 @@
 
         <!-- Split dropright button -->
         <div class="mb-2" style="min-height: 30px">
-          <div class="btn-group dropend">
+          <div class="btn-group dropright">
             <button type="button" class="btn btn-sm btn-secondary">Split dropright</button>
             <button type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-expanded="false">
               <span class="sr-only">Toggle Dropright</span>
@@ -193,7 +193,7 @@
 
         <!-- Default dropleft button -->
         <div class="mb-2" style="min-height: 30px; margin-left: 0px">
-          <div class="btn-group dropstart">
+          <div class="btn-group dropleft">
             <button type="button" class="btn btn-sm btn-secondary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Dropleft</button>
             <div class="dropdown-menu">
               <button class="dropdown-item" type="button">Action</button>
@@ -205,7 +205,7 @@
         <!-- Split dropleft button -->
         <div class="mb-2" style="min-height: 30px; margin-left: 0px">
           <div class="btn-group">
-            <div class="btn-group dropstart">
+            <div class="btn-group dropleft">
               <button type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-expanded="false">
                 <span class="sr-only">Toggle Dropleft</span>
               </button>
@@ -221,7 +221,7 @@
         <div class="mb-2" style="min-height: 30px">
           <div class="btn-group">
             <button type="button" class="btn btn-sm btn-secondary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Right-aligned menu</button>
-            <div class="dropdown-menu dropdown-menu-end">
+            <div class="dropdown-menu dropdown-menu-right">
               <button class="dropdown-item" type="button">Action</button>
               <button class="dropdown-item" type="button">Another action</button>
             </div>
@@ -233,7 +233,7 @@
             <button type="button" class="btn btn-sm btn-secondary dropdown-toggle" data-toggle="dropdown" data-display="static" aria-expanded="false">
               Left-aligned but right aligned when large screen
             </button>
-            <div class="dropdown-menu dropdown-menu-lg-end">
+            <div class="dropdown-menu dropdown-menu-lg-right">
               <button class="dropdown-item" type="button">Action</button>
               <button class="dropdown-item" type="button">Another action</button>
             </div>
@@ -245,7 +245,7 @@
             <button type="button" class="btn btn-sm btn-secondary dropdown-toggle" data-toggle="dropdown" data-display="static" aria-expanded="false">
               Right-aligned but left aligned when large screen
             </button>
-            <div class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
+            <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left">
               <button class="dropdown-item" type="button">Action</button>
               <button class="dropdown-item" type="button">Another action</button>
             </div>
@@ -265,16 +265,16 @@
             <div class="col-sm-3 my-1">
               <label class="sr-only" for="inlineFormInputGroupUsername">Username</label>
               <div class="input-group">
-                <div class="input-group-prepend">
+                <div>
                   <div class="input-group-text">@</div>
                 </div>
                 <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Username" />
               </div>
             </div>
             <div class="col-auto my-1">
-              <div class="custom-control custom-checkbox">
-                <input class="custom-control-input" type="checkbox" id="autoSizingCheck2" />
-                <label class="custom-control-label" for="autoSizingCheck2"> Remember me </label>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="autoSizingCheck2" />
+                <label class="form-check-label" for="autoSizingCheck2"> Remember me </label>
               </div>
             </div>
             <div class="col-auto my-1">
@@ -289,36 +289,36 @@
           </select>
         </div>
         <div class="my-2">
-          <select class="form-select custom-select-sm" aria-label="Small select example">
+          <select class="custom-select custom-select-sm" aria-label="Small select example">
             <option>Small select</option>
           </select>
         </div>
         <div class="my-2">
-          <select class="form-select custom-select-lg" aria-label="Large select example">
+          <select class="custom-select custom-select-lg" aria-label="Large select example">
             <option>Large select</option>
           </select>
         </div>
 
-        <div class="custom-control custom-checkbox">
-          <input class="custom-control-input" type="checkbox" value="" id="defaultCheck1" />
-          <label class="custom-control-label" for="defaultCheck1"> Default checkbox </label>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" />
+          <label class="form-check-label" for="defaultCheck1"> Default checkbox </label>
         </div>
-        <div class="custom-control custom-checkbox">
-          <input class="custom-control-input" type="checkbox" value="" id="defaultCheck2" disabled />
-          <label class="custom-control-label" for="defaultCheck2"> Disabled checkbox </label>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled />
+          <label class="form-check-label" for="defaultCheck2"> Disabled checkbox </label>
         </div>
 
-        <div class="custom-control custom-checkbox mt-3">
-          <input class="custom-control-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked />
-          <label class="custom-control-label" for="exampleRadios1"> Default radio </label>
+        <div class="form-check mt-3">
+          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked />
+          <label class="form-check-label" for="exampleRadios1"> Default radio </label>
         </div>
-        <div class="custom-control custom-checkbox">
-          <input class="custom-control-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" />
-          <label class="custom-control-label" for="exampleRadios2"> Second default radio </label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" />
+          <label class="form-check-label" for="exampleRadios2"> Second default radio </label>
         </div>
-        <div class="custom-control custom-checkbox">
-          <input class="custom-control-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" disabled />
-          <label class="custom-control-label" for="exampleRadios3"> Disabled radio </label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" disabled />
+          <label class="form-check-label" for="exampleRadios3"> Disabled radio </label>
         </div>
 
         <form class="my-3">
@@ -337,33 +337,33 @@
 
         <h4 class="h5 mt-4" id="custom-forms">Custom forms</h4>
 
-        <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="customCheck1" />
-          <label class="custom-control-label" for="customCheck1">Check this custom checkbox</label>
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" id="customCheck1" />
+          <label class="form-check-label" for="customCheck1">Check this custom checkbox</label>
         </div>
 
-        <div class="custom-control custom-checkbox">
-          <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" />
-          <label class="custom-control-label" for="customRadio1">Toggle this custom radio</label>
+        <div class="form-check">
+          <input type="radio" id="customRadio1" name="customRadio" class="form-check-input" />
+          <label class="form-check-label" for="customRadio1">Toggle this custom radio</label>
         </div>
-        <div class="custom-control custom-checkbox">
-          <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" />
-          <label class="custom-control-label" for="customRadio2">Or toggle this other custom radio</label>
+        <div class="form-check">
+          <input type="radio" id="customRadio2" name="customRadio" class="form-check-input" />
+          <label class="form-check-label" for="customRadio2">Or toggle this other custom radio</label>
         </div>
 
         <div class="mt-3">
-          <div class="custom-control custom-checkbox form-switch">
-            <input type="checkbox" class="custom-control-input" id="customSwitch1" checked />
-            <label class="custom-control-label" for="customSwitch1">Toggle this switch element</label>
+          <div class="form-check form-switch">
+            <input type="checkbox" class="form-check-input" id="customSwitch1" checked />
+            <label class="form-check-label" for="customSwitch1">Toggle this switch element</label>
           </div>
-          <div class="custom-control custom-checkbox form-switch">
-            <input type="checkbox" class="custom-control-input" disabled id="customSwitch2" />
-            <label class="custom-control-label" for="customSwitch2">Disabled switch element</label>
+          <div class="form-check form-switch">
+            <input type="checkbox" class="form-check-input" disabled id="customSwitch2" />
+            <label class="form-check-label" for="customSwitch2">Disabled switch element</label>
           </div>
         </div>
 
         <div class="my-3">
-          <select class="form-select custom-select-sm" aria-label="Small select example">
+          <select class="custom-select custom-select-sm" aria-label="Small select example">
             <option selected>Open this select menu (small)</option>
             <option value="1">One</option>
             <option value="2">Two</option>
@@ -381,7 +381,7 @@
         </div>
 
         <div class="my-3">
-          <select class="form-select custom-select-lg" aria-label="Large select example">
+          <select class="custom-select custom-select-lg" aria-label="Large select example">
             <option selected>Open this select menu (Large)</option>
             <option value="1">One</option>
             <option value="2">Two</option>
@@ -395,8 +395,8 @@
         </div>
 
         <div class="my-3">
-          <div class="custom-file">
-            <label class="form-label" for="customFile">Choose file</label>
+          <div>
+            <label class="custom-file-label" for="customFile">Choose file</label>
             <input type="file" class="form-control" id="customFile" />
           </div>
         </div>
@@ -404,7 +404,7 @@
         <h4 class="h5 mt-4 mb-3" id="input-group">Input Group</h4>
 
         <div class="input-group mb-3">
-          <div class="input-group-prepend">
+          <div>
             <span class="input-group-text" id="basic-addon1">@</span>
           </div>
           <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" />
@@ -412,7 +412,7 @@
 
         <div class="input-group mb-3">
           <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2" />
-          <div class="input-group-append">
+          <div>
             <span class="input-group-text" id="basic-addon2">@example.com</span>
           </div>
         </div>
@@ -430,9 +430,7 @@
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-
-                </button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
               </div>
               <div class="modal-body">...</div>
               <div class="modal-footer">
@@ -454,7 +452,7 @@
           </button>
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto">
+            <ul class="navbar-nav mr-auto">
               <li class="nav-item active">
                 <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
               </li>
@@ -475,7 +473,7 @@
               </li>
             </ul>
             <form class="d-flex align-items-center my-2 my-lg-0">
-              <input class="form-control me-sm-2" type="search" placeholder="Search" aria-label="Search" />
+              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
               <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
           </div>
@@ -503,8 +501,8 @@
 
         <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true" data-animation="false" data-autohide="false">
           <div class="toast-header">
-            <div class="rounded bg-primary me-2 p-2"></div>
-            <strong class="me-auto">Bootstrap</strong>
+            <div class="rounded bg-primary mr-2 p-2"></div>
+            <strong class="mr-auto">Bootstrap</strong>
             <small>11 mins ago</small>
           </div>
           <div class="toast-body">Hello, world! This is a toast message.</div>
@@ -528,25 +526,25 @@
 
         <h4 class="h6 mt-4" id="border-additive">Additive</h4>
 
-        <div class="border-end border-secondary bg-light me-2 d-inline-block" style="height: 5rem; width: 5rem"></div>
-        <div class="border-start border-secondary bg-light me-2 d-inline-block" style="height: 5rem; width: 5rem"></div>
+        <div class="border-right border-secondary bg-light mr-2 d-inline-block" style="height: 5rem; width: 5rem"></div>
+        <div class="border-left border-secondary bg-light mr-2 d-inline-block" style="height: 5rem; width: 5rem"></div>
 
         <h4 class="h6 mt-4" id="border-subtractive">Subtractive</h4>
 
-        <div class="border-end-0 border-secondary bg-light me-2 d-inline-block" style="height: 5rem; width: 5rem; border: 1px solid #dee2e6"></div>
-        <div class="border-start-0 border-secondary bg-light me-2 d-inline-block" style="height: 5rem; width: 5rem; border: 1px solid #dee2e6"></div>
+        <div class="border-right-0 border-secondary bg-light mr-2 d-inline-block" style="height: 5rem; width: 5rem; border: 1px solid #dee2e6"></div>
+        <div class="border-left-0 border-secondary bg-light mr-2 d-inline-block" style="height: 5rem; width: 5rem; border: 1px solid #dee2e6"></div>
 
         <h4 class="h6 mt-4" id="border-radius">Border Radius</h4>
 
-        <img src="https://placehold.co/75x75" class="rounded-end" width="75" height="75" alt="rounded-right" title="rounded-right" />
-        <img src="https://placehold.co/75x75" class="rounded-start" width="75" height="75" alt="rounded-left" title="rounded-left" />
+        <img src="https://placehold.co/75x75" class="rounded-right" width="75" height="75" alt="rounded-right" title="rounded-right" />
+        <img src="https://placehold.co/75x75" class="rounded-left" width="75" height="75" alt="rounded-left" title="rounded-left" />
         <img src="https://placehold.co/75x75" class="rounded-circle" width="75" height="75" alt="rounded-circle" title="rounded-circle" />
         <img src="https://placehold.co/150x75" class="badge-pill" width="150" height="75" alt="rounded-pill" title="rounded-pill" />
 
         <br /><br />
 
-        <img src="https://placehold.co/75x75" class="rounded-1" width="75" height="75" alt="rounded-sm" title="rounded-sm" />
-        <img src="https://placehold.co/75x75" class="rounded-3" width="75" height="75" alt="rounded-lg" title="rounded-lg" />
+        <img src="https://placehold.co/75x75" class="rounded-sm" width="75" height="75" alt="rounded-sm" title="rounded-sm" />
+        <img src="https://placehold.co/75x75" class="rounded-lg" width="75" height="75" alt="rounded-lg" title="rounded-lg" />
 
         <hr class="my-5" />
 
@@ -561,25 +559,23 @@
 
         <h3 class="h4" id="close-button">Close Button</h3>
 
-        <div class="ms-1 float-left mb-5">
-          <button type="button" class="close" aria-label="Close">
-
-          </button>
+        <div class="ml-1 float-left mb-5">
+          <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         </div>
 
         <hr class="my-5" />
 
         <h3 class="h4" id="float">Float</h3>
 
-        <div class="float-sm-end">Float right</div>
+        <div class="float-sm-right">Float right</div>
         <br />
-        <div class="float-sm-end">Float right on viewports sized SM (small) or wider</div>
+        <div class="float-sm-right">Float right on viewports sized SM (small) or wider</div>
         <br />
-        <div class="float-md-end">Float right on viewports sized MD (medium) or wider</div>
+        <div class="float-md-right">Float right on viewports sized MD (medium) or wider</div>
         <br />
-        <div class="float-lg-end">Float right on viewports sized LG (large) or wider</div>
+        <div class="float-lg-right">Float right on viewports sized LG (large) or wider</div>
         <br />
-        <div class="float-xl-end">Float right on viewports sized XL (extra-large) or wider</div>
+        <div class="float-xl-right">Float right on viewports sized XL (extra-large) or wider</div>
         <br />
 
         <hr class="my-5" />
@@ -588,62 +584,62 @@
 
         <div class="sr-only">information</div>
 
-        <a class="sr-only-focusable" href="#content">Skip to main content</a>
+        <a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
         <hr class="my-5" />
 
         <h3 class="h4" id="spacing">Spacing</h3>
 
-        <div class="my-2 ps-5">
-          <div class="ms-1 bg-light border" style="width: 100px">ml-1</div>
-          <div class="ms-2 bg-light border" style="width: 100px">ml-2</div>
-          <div class="ms-3 bg-light border" style="width: 100px">ml-3</div>
-          <div class="ms-4 bg-light border" style="width: 100px">ml-4</div>
-          <div class="ms-5 bg-light border" style="width: 100px">ml-5</div>
+        <div class="my-2 pl-5">
+          <div class="ml-1 bg-light border" style="width: 100px">ml-1</div>
+          <div class="ml-2 bg-light border" style="width: 100px">ml-2</div>
+          <div class="ml-3 bg-light border" style="width: 100px">ml-3</div>
+          <div class="ml-4 bg-light border" style="width: 100px">ml-4</div>
+          <div class="ml-5 bg-light border" style="width: 100px">ml-5</div>
         </div>
 
-        <div class="my-2 ps-5">
-          <div class="ms-n1 bg-light border" style="width: 100px">ml-n1</div>
-          <div class="ms-sm-n2 bg-light border" style="width: 100px">ml-sm-n2</div>
-          <div class="ms-md-n3 bg-light border" style="width: 100px">ml-md-n3</div>
-          <div class="ms-lg-n4 bg-light border" style="width: 100px">ml-lg-n4</div>
-          <div class="ms-xl-n5 bg-light border" style="width: 100px">ml-xl-n5</div>
+        <div class="my-2 pl-5">
+          <div class="ml-n1 bg-light border" style="width: 100px">ml-n1</div>
+          <div class="ml-sm-n2 bg-light border" style="width: 100px">ml-sm-n2</div>
+          <div class="ml-md-n3 bg-light border" style="width: 100px">ml-md-n3</div>
+          <div class="ml-lg-n4 bg-light border" style="width: 100px">ml-lg-n4</div>
+          <div class="ml-xl-n5 bg-light border" style="width: 100px">ml-xl-n5</div>
           <small class="opacity-75 text-muted"> Note: Negative margins are not included in the compiled Bootstrap 5.x CSS by default </small>
         </div>
 
-        <div class="my-2 ps-5">
-          <div class="ps-1 bg-light border" style="width: 100px">pl-1</div>
-          <div class="ps-2 bg-light border" style="width: 100px">pl-2</div>
-          <div class="ps-3 bg-light border" style="width: 100px">pl-3</div>
-          <div class="ps-4 bg-light border" style="width: 100px">pl-4</div>
-          <div class="ps-5 bg-light border" style="width: 100px">pl-5</div>
+        <div class="my-2 pl-5">
+          <div class="pl-1 bg-light border" style="width: 100px">pl-1</div>
+          <div class="pl-2 bg-light border" style="width: 100px">pl-2</div>
+          <div class="pl-3 bg-light border" style="width: 100px">pl-3</div>
+          <div class="pl-4 bg-light border" style="width: 100px">pl-4</div>
+          <div class="pl-5 bg-light border" style="width: 100px">pl-5</div>
         </div>
 
         <hr class="my-5" />
 
         <h3 class="h4" id="text">Text</h3>
 
-        <p class="text-start">Left aligned text on all viewport sizes.</p>
-        <p class="text-end">Right aligned text on all viewport sizes.</p>
+        <p class="text-left">Left aligned text on all viewport sizes.</p>
+        <p class="text-right">Right aligned text on all viewport sizes.</p>
 
-        <p class="text-sm-start">Left aligned text on viewports sized SM (small) or wider.</p>
-        <p class="text-md-start">Left aligned text on viewports sized MD (medium) or wider.</p>
-        <p class="text-lg-start">Left aligned text on viewports sized LG (large) or wider.</p>
-        <p class="text-xl-start">Left aligned text on viewports sized XL (extra-large) or wider.</p>
+        <p class="text-sm-left">Left aligned text on viewports sized SM (small) or wider.</p>
+        <p class="text-md-left">Left aligned text on viewports sized MD (medium) or wider.</p>
+        <p class="text-lg-left">Left aligned text on viewports sized LG (large) or wider.</p>
+        <p class="text-xl-left">Left aligned text on viewports sized XL (extra-large) or wider.</p>
 
-        <p class="text-sm-end">Right aligned text on viewports sized SM (small) or wider.</p>
-        <p class="text-md-end">Right aligned text on viewports sized MD (medium) or wider.</p>
-        <p class="text-lg-end">Right aligned text on viewports sized LG (large) or wider.</p>
-        <p class="text-xl-end">Right aligned text on viewports sized XL (extra-large) or wider.</p>
+        <p class="text-sm-right">Right aligned text on viewports sized SM (small) or wider.</p>
+        <p class="text-md-right">Right aligned text on viewports sized MD (medium) or wider.</p>
+        <p class="text-lg-right">Right aligned text on viewports sized LG (large) or wider.</p>
+        <p class="text-xl-right">Right aligned text on viewports sized XL (extra-large) or wider.</p>
 
-        <p class="fw-bold">Bold text.</p>
-        <p class="fw-bolder">Bolder weight text (relative to the parent element).</p>
-        <p class="fw-normal">Normal weight text.</p>
-        <p class="fw-light">Light weight text.</p>
-        <p class="fw-lighter">Lighter weight text (relative to the parent element).</p>
-        <p class="fst-italic">Italic text.</p>
+        <p class="font-weight-bold">Bold text.</p>
+        <p class="font-weight-bolder">Bolder weight text (relative to the parent element).</p>
+        <p class="font-weight-normal">Normal weight text.</p>
+        <p class="font-weight-light">Light weight text.</p>
+        <p class="font-weight-lighter">Lighter weight text (relative to the parent element).</p>
+        <p class="font-italic">Italic text.</p>
 
-        <p class="font-monospace">This is in monospace</p>
+        <p class="text-monospace">This is in monospace</p>
 
         <hr class="my-5" />
 
@@ -658,8 +654,8 @@
 
         <div class="mb-5">
           <!-- 16:9 aspect ratio -->
-          <div class="ratio ratio-16x9">
-            <iframe class="" src="https://example.com" aria-label="Example iframe"></iframe>
+          <div class="embed-responsive embed-responsive-16by9">
+            <iframe src="https://example.com" aria-label="Example iframe"></iframe>
           </div>
         </div>
 
@@ -667,7 +663,7 @@
 
         <h3 class="h4" id="jumbotron">Jumbotron</h3>
 
-        <div class="bg-light mb-4 rounded-2 py-5 px-3">
+        <div class="jumbotron">
           <h1 class="display-4">Hello, world!</h1>
           <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
           <hr class="my-4" />
@@ -675,7 +671,7 @@
           <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
         </div>
 
-        <div class="bg-light mb-4 rounded-2 py-5 px-3 rounded-0 px-0">
+        <div class="jumbotron jumbotron-fluid">
           <div class="container">
             <h1 class="display-4">Fluid jumbotron</h1>
             <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
@@ -687,7 +683,7 @@
         <h3 class="h4" id="media">Media</h3>
 
         <div class="d-flex">
-          <img src="https://placehold.co/64x64" class="me-3" alt="" />
+          <img src="https://placehold.co/64x64" class="mr-3" alt="" />
           <div class="flex-grow-1">
             <h5 class="mt-0">Media heading</h5>
             <p>
@@ -696,7 +692,165 @@
             </p>
           </div>
         </div>
-      </main>
+      <!-- migration-coverage:start -->
+        <h2 class="mt-5" id="migration-coverage">Migration coverage</h2>
+        <p class="lead">
+          This page uses Bootstrap 5 class names. Every class name, data attribute and CDN link that the migrate tool updates when it migrates this page is listed below. The name is shown as text and applied to the element.
+        </p>
+
+        <h3 class="h4">Class names</h3>
+        <div class="bs-component">
+          <p class="small">
+            <code class="jumbotron">bg-light mb-4 rounded-2 py-5 px-3</code>
+            <code class="border-right">border-end</code>
+            <code class="border-right-0">border-end-0</code>
+            <code class="border-left">border-start</code>
+            <code class="border-left-0">border-start-0</code>
+            <code class="close">btn-close</code>
+            <code class="width">collapse-horizontal</code>
+            <code class="d-flex">d-flex</code>
+            <code class="d-flex align-items-center">d-flex align-items-center</code>
+            <code class="btn-block">d-grid</code>
+            <code class="d-none">d-none</code>
+            <code class="dropdown-menu-right">dropdown-menu-end</code>
+            <code class="dropdown-menu-lg-right">dropdown-menu-lg-end</code>
+            <code class="dropdown-menu-lg-left">dropdown-menu-lg-start</code>
+            <code class="dropdown-menu-md-right">dropdown-menu-md-end</code>
+            <code class="dropdown-menu-md-left">dropdown-menu-md-start</code>
+            <code class="dropdown-menu-sm-right">dropdown-menu-sm-end</code>
+            <code class="dropdown-menu-sm-left">dropdown-menu-sm-start</code>
+            <code class="dropdown-menu-left">dropdown-menu-start</code>
+            <code class="dropdown-menu-xl-right">dropdown-menu-xl-end</code>
+            <code class="dropdown-menu-xl-left">dropdown-menu-xl-start</code>
+            <code class="dropright">dropend</code>
+            <code class="dropleft">dropstart</code>
+            <code class="flex-grow-1">flex-grow-1</code>
+            <code class="float-right">float-end</code>
+            <code class="float-lg-right">float-lg-end</code>
+            <code class="float-lg-left">float-lg-start</code>
+            <code class="float-md-right">float-md-end</code>
+            <code class="float-md-left">float-md-start</code>
+            <code class="float-sm-right">float-sm-end</code>
+            <code class="float-sm-left">float-sm-start</code>
+            <code class="float-left">float-start</code>
+            <code class="float-xl-right">float-xl-end</code>
+            <code class="float-xl-left">float-xl-start</code>
+            <code class="text-monospace">font-monospace</code>
+            <code class="form-check">form-check</code>
+            <code class="form-check form-switch">form-check form-switch</code>
+            <code class="form-check-input">form-check-input</code>
+            <code class="form-check-label">form-check-label</code>
+            <code class="form-control">form-control</code>
+            <code class="custom-file-label">form-label</code>
+            <code class="custom-range">form-range</code>
+            <code class="custom-select">form-select</code>
+            <code class="custom-select-lg">form-select-lg</code>
+            <code class="custom-select-sm">form-select-sm</code>
+            <code class="font-italic">fst-italic</code>
+            <code class="font-weight-bold">fw-bold</code>
+            <code class="font-weight-bolder">fw-bolder</code>
+            <code class="font-weight-light">fw-light</code>
+            <code class="font-weight-lighter">fw-lighter</code>
+            <code class="font-weight-normal">fw-normal</code>
+            <code class="no-gutters">g-0</code>
+            <code class="mb-3">mb-3</code>
+            <code class="mr-3">me-3</code>
+            <code class="ml-3">ms-3</code>
+            <code class="pre-scrollable">overflow-y-scroll</code>
+            <code class="pr-3">pe-3</code>
+            <code class="pl-3">ps-3</code>
+            <code class="embed-responsive">ratio</code>
+            <code class="embed-responsive-16by9">ratio-16x9</code>
+            <code class="embed-responsive-1by1">ratio-1x1</code>
+            <code class="embed-responsive-21by9">ratio-21x9</code>
+            <code class="embed-responsive-4by3">ratio-4x3</code>
+            <code class="jumbotron-fluid">rounded-0 px-0</code>
+            <code class="rounded-sm">rounded-1</code>
+            <code class="rounded-lg">rounded-3</code>
+            <code class="rounded-right">rounded-end</code>
+            <code class="badge-pill">rounded-pill</code>
+            <code class="rounded-left">rounded-start</code>
+            <code class="row">row</code>
+            <code class="thead-dark">table-dark</code>
+            <code class="thead-light">table-light</code>
+            <code class="badge-danger">text-bg-danger</code>
+            <code class="badge-dark">text-bg-dark</code>
+            <code class="badge-info">text-bg-info</code>
+            <code class="badge-light">text-bg-light</code>
+            <code class="badge-primary">text-bg-primary</code>
+            <code class="badge-secondary">text-bg-secondary</code>
+            <code class="badge-success">text-bg-success</code>
+            <code class="badge-warning">text-bg-warning</code>
+            <code class="text-right">text-end</code>
+            <code class="text-lg-right">text-lg-end</code>
+            <code class="text-lg-left">text-lg-start</code>
+            <code class="text-md-right">text-md-end</code>
+            <code class="text-md-left">text-md-start</code>
+            <code class="text-sm-right">text-sm-end</code>
+            <code class="text-sm-left">text-sm-start</code>
+            <code class="text-left">text-start</code>
+            <code class="text-xl-right">text-xl-end</code>
+            <code class="text-xl-left">text-xl-start</code>
+            <code class="sr-only">visually-hidden</code>
+            <code class="sr-only sr-only-focusable">visually-hidden-focusable</code>
+          </p>
+        </div>
+
+        <h3 class="h4">Data attributes</h3>
+        <div class="bs-component">
+          <p class="small">
+            <code data-animation="example">data-bs-animation</code>
+            <code data-autohide="example">data-bs-autohide</code>
+            <code data-backdrop="example">data-bs-backdrop</code>
+            <code data-boundary="example">data-bs-boundary</code>
+            <code data-container="example">data-bs-container</code>
+            <code data-content="example">data-bs-content</code>
+            <code data-custom-class="example">data-bs-custom-class</code>
+            <code data-delay="example">data-bs-delay</code>
+            <code data-dismiss="example">data-bs-dismiss</code>
+            <code data-display="example">data-bs-display</code>
+            <code data-html="example">data-bs-html</code>
+            <code data-interval="example">data-bs-interval</code>
+            <code data-keyboard="example">data-bs-keyboard</code>
+            <code data-method="example">data-bs-method</code>
+            <code data-offset="example">data-bs-offset</code>
+            <code data-parent="example">data-bs-parent</code>
+            <code data-pause="example">data-bs-pause</code>
+            <code data-placement="example">data-bs-placement</code>
+            <code data-popper-config="example">data-bs-popper-config</code>
+            <code data-reference="example">data-bs-reference</code>
+            <code data-ride="example">data-bs-ride</code>
+            <code data-selector="example">data-bs-selector</code>
+            <code data-slide="example">data-bs-slide</code>
+            <code data-slide-to="example">data-bs-slide-to</code>
+            <code data-spy="example">data-bs-spy</code>
+            <code data-target="example">data-bs-target</code>
+            <code data-template="example">data-bs-template</code>
+            <code data-title="example">data-bs-title</code>
+            <code data-toggle="example">data-bs-toggle</code>
+            <code data-touch="example">data-bs-touch</code>
+            <code data-trigger="example">data-bs-trigger</code>
+            <code data-wrap="example">data-bs-wrap</code>
+          </p>
+        </div>
+
+        <h3 class="h4">CDN links</h3>
+        <div class="bs-component">
+          <p class="small">
+            <code>https://cdn.jsdelivr.net/npm/bootstrap@5/dist/css/bootstrap.min.css</code>
+            <code>https://cdn.jsdelivr.net/npm/bootstrap@5/dist/js/bootstrap.bundle.min.js</code>
+            <code>https://unpkg.com/bootstrap@5/dist/css/bootstrap.min.css</code>
+            <code>https://unpkg.com/bootstrap/5/dist/js/bootstrap.bundle.min.js</code>
+            <code>https://stackpath.bootstrapcdn.com/bootstrap/5/css/bootstrap.min.css</code>
+            <code>https://stackpath.bootstrapcdn.com/bootstrap/5/js/bootstrap.bundle.min.js</code>
+            <code>https://maxcdn.bootstrapcdn.com/bootstrap/5/css/bootstrap.min.css</code>
+            <code>https://maxcdn.bootstrapcdn.com/bootstrap/5/js/bootstrap.min.js</code>
+            <code>https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5/css/bootstrap.min.css</code>
+            <code>https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5/js/bootstrap.bundle.min.js</code>
+          </p>
+        </div>
+<!-- migration-coverage:end -->
+</main>
     </div>
   </div>
 
@@ -791,7 +945,7 @@
               </button>
 
               <div class="collapse navbar-collapse" id="navbarColor01">
-                <ul class="navbar-nav me-auto">
+                <ul class="navbar-nav mr-auto">
                   <li class="nav-item active">
                     <a class="nav-link" href="#">Home
                       <span class="sr-only">(current)</span>
@@ -818,7 +972,7 @@
                   </li>
                 </ul>
                 <form class="d-flex align-items-center my-2 my-lg-0">
-                  <input class="form-control me-sm-2" type="text" placeholder="Search">
+                  <input class="form-control mr-sm-2" type="text" placeholder="Search">
                   <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
                 </form>
               </div>
@@ -833,7 +987,7 @@
               </button>
 
               <div class="collapse navbar-collapse" id="navbarColor02">
-                <ul class="navbar-nav me-auto">
+                <ul class="navbar-nav mr-auto">
                   <li class="nav-item active">
                     <a class="nav-link" href="#">Home
                       <span class="sr-only">(current)</span>
@@ -860,7 +1014,7 @@
                   </li>
                 </ul>
                 <form class="d-flex align-items-center my-2 my-lg-0">
-                  <input class="form-control me-sm-2" type="text" placeholder="Search">
+                  <input class="form-control mr-sm-2" type="text" placeholder="Search">
                   <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
                 </form>
               </div>
@@ -875,7 +1029,7 @@
               </button>
 
               <div class="collapse navbar-collapse" id="navbarColor03">
-                <ul class="navbar-nav me-auto">
+                <ul class="navbar-nav mr-auto">
                   <li class="nav-item active">
                     <a class="nav-link" href="#">Home
                       <span class="sr-only">(current)</span>
@@ -902,7 +1056,7 @@
                   </li>
                 </ul>
                 <form class="d-flex align-items-center my-2 my-lg-0">
-                  <input class="form-control me-sm-2" type="text" placeholder="Search">
+                  <input class="form-control mr-sm-2" type="text" placeholder="Search">
                   <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
                 </form>
               </div>
@@ -1060,13 +1214,13 @@
 
           <div class="bs-component mb-3">
             <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-              <div class="btn-group me-2" role="group" aria-label="First group">
+              <div class="btn-group mr-2" role="group" aria-label="First group">
                 <button type="button" class="btn btn-secondary">1</button>
                 <button type="button" class="btn btn-secondary">2</button>
                 <button type="button" class="btn btn-secondary">3</button>
                 <button type="button" class="btn btn-secondary">4</button>
               </div>
-              <div class="btn-group me-2" role="group" aria-label="Second group">
+              <div class="btn-group mr-2" role="group" aria-label="Second group">
                 <button type="button" class="btn btn-secondary">5</button>
                 <button type="button" class="btn btn-secondary">6</button>
                 <button type="button" class="btn btn-secondary">7</button>
@@ -1159,7 +1313,7 @@
         </div>
         <div class="col-lg-4">
           <div class="bs-component">
-            <blockquote class="blockquote text-end">
+            <blockquote class="blockquote text-right">
               <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
               <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
             </blockquote>
@@ -1236,13 +1390,13 @@
                   <td>Column content</td>
                   <td>Column content</td>
                 </tr>
-                <tr class="table-light">
+                <tr class="thead-light">
                   <th scope="row">Light</th>
                   <td>Column content</td>
                   <td>Column content</td>
                   <td>Column content</td>
                 </tr>
-                <tr class="table-dark">
+                <tr class="thead-dark">
                   <th scope="row">Dark</th>
                   <td>Column content</td>
                   <td>Column content</td>
@@ -1318,36 +1472,36 @@
                 </div>
                 <fieldset class="mb-3">
                   <legend>Radio buttons</legend>
-                  <div class="custom-control custom-checkbox">
-                    <label class="custom-control-label">
-                      <input type="radio" class="custom-control-input" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" checked>
                       Option one is this and that&mdash;be sure to include why it's great
                     </label>
                   </div>
-                  <div class="custom-control custom-checkbox">
-                    <label class="custom-control-label">
-                      <input type="radio" class="custom-control-input" name="optionsRadios" id="optionsRadios2" value="option2">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
                       Option two can be something else and selecting it will deselect option one
                     </label>
                   </div>
-                  <div class="custom-control custom-checkbox disabled">
-                    <label class="custom-control-label">
-                      <input type="radio" class="custom-control-input" name="optionsRadios" id="optionsRadios3" value="option3" disabled>
+                  <div class="form-check disabled">
+                    <label class="form-check-label">
+                      <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios3" value="option3" disabled>
                       Option three is disabled
                     </label>
                   </div>
                 </fieldset>
                 <fieldset class="mb-3">
                   <legend>Checkboxes</legend>
-                  <div class="custom-control custom-checkbox">
-                    <label class="custom-control-label">
-                      <input class="custom-control-input" type="checkbox" value="" checked>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input class="form-check-input" type="checkbox" value="" checked>
                       Option one is this and that&mdash;be sure to include why it's great
                     </label>
                   </div>
-                  <div class="custom-control custom-checkbox disabled">
-                    <label class="custom-control-label">
-                      <input class="custom-control-input" type="checkbox" value="" disabled>
+                  <div class="form-check disabled">
+                    <label class="form-check-label">
+                      <input class="form-check-input" type="checkbox" value="" disabled>
                       Option two is disabled
                     </label>
                   </div>
@@ -1366,26 +1520,26 @@
           <form class="bs-component">
             <div class="mb-3">
               <fieldset disabled>
-                <label class="control-label" for="disabledInput">Disabled input</label>
+                <label class="col-form-label" for="disabledInput">Disabled input</label>
                 <input class="form-control" id="disabledInput" type="text" placeholder="Disabled input here..." disabled>
               </fieldset>
             </div>
 
             <div class="mb-3">
               <fieldset>
-                <label class="control-label" for="readOnlyInput">Readonly input</label>
+                <label class="col-form-label" for="readOnlyInput">Readonly input</label>
                 <input class="form-control" id="readOnlyInput" type="text" placeholder="Readonly input here..." readonly>
               </fieldset>
             </div>
 
-            <div class="mb-3 has-success">
-              <label class="form-control-label" for="inputValid">Valid input</label>
+            <div class="mb-3">
+              <label class="col-form-label" for="inputValid">Valid input</label>
               <input type="text" value="correct value" class="form-control is-valid" id="inputValid">
               <div class="valid-feedback">Success! You've done it.</div>
             </div>
 
-            <div class="mb-3 has-danger">
-              <label class="form-control-label" for="inputInvalid">Invalid input</label>
+            <div class="mb-3">
+              <label class="col-form-label" for="inputInvalid">Invalid input</label>
               <input type="text" value="wrong value" class="form-control is-invalid" id="inputInvalid">
               <div class="invalid-feedback">Sorry, that username's taken. Try another?</div>
             </div>
@@ -1406,14 +1560,14 @@
             </div>
 
             <div class="mb-3">
-              <label class="control-label">Input addons</label>
+              <label class="col-form-label">Input addons</label>
               <div class="mb-3">
                 <div class="input-group mb-3">
-                  <div class="input-group-prepend">
+                  <div>
                     <span class="input-group-text">$</span>
                   </div>
                   <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-                  <div class="input-group-append">
+                  <div>
                     <span class="input-group-text">.00</span>
                   </div>
                 </div>
@@ -1425,37 +1579,37 @@
             <fieldset>
               <legend>Custom forms</legend>
               <div class="mb-3">
-                <div class="custom-control custom-checkbox">
-                  <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" checked>
-                  <label class="custom-control-label" for="customRadio1">Toggle this custom radio</label>
+                <div class="form-check">
+                  <input type="radio" id="customRadio1" name="customRadio" class="form-check-input" checked>
+                  <label class="form-check-label" for="customRadio1">Toggle this custom radio</label>
                 </div>
-                <div class="custom-control custom-checkbox">
-                  <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
-                  <label class="custom-control-label" for="customRadio2">Or toggle this other custom radio</label>
+                <div class="form-check">
+                  <input type="radio" id="customRadio2" name="customRadio" class="form-check-input">
+                  <label class="form-check-label" for="customRadio2">Or toggle this other custom radio</label>
                 </div>
-                <div class="custom-control custom-checkbox">
-                  <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input" disabled>
-                  <label class="custom-control-label" for="customRadio3">Disabled custom radio</label>
-                </div>
-              </div>
-              <div class="mb-3">
-                <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="customCheck1" checked>
-                  <label class="custom-control-label" for="customCheck1">Check this custom checkbox</label>
-                </div>
-                <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="customCheck2" disabled>
-                  <label class="custom-control-label" for="customCheck2">Disabled custom checkbox</label>
+                <div class="form-check">
+                  <input type="radio" id="customRadio3" name="customRadio" class="form-check-input" disabled>
+                  <label class="form-check-label" for="customRadio3">Disabled custom radio</label>
                 </div>
               </div>
               <div class="mb-3">
-                <div class="custom-control custom-checkbox form-switch">
-                  <input type="checkbox" class="custom-control-input" id="customSwitch1" checked>
-                  <label class="custom-control-label" for="customSwitch1">Toggle this switch element</label>
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input" id="customCheck1" checked>
+                  <label class="form-check-label" for="customCheck1">Check this custom checkbox</label>
                 </div>
-                <div class="custom-control custom-checkbox form-switch">
-                  <input type="checkbox" class="custom-control-input" disabled id="customSwitch2">
-                  <label class="custom-control-label" for="customSwitch2">Disabled switch element</label>
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input" id="customCheck2" disabled>
+                  <label class="form-check-label" for="customCheck2">Disabled custom checkbox</label>
+                </div>
+              </div>
+              <div class="mb-3">
+                <div class="form-check form-switch">
+                  <input type="checkbox" class="form-check-input" id="customSwitch1" checked>
+                  <label class="form-check-label" for="customSwitch1">Toggle this switch element</label>
+                </div>
+                <div class="form-check form-switch">
+                  <input type="checkbox" class="form-check-input" disabled id="customSwitch2">
+                  <label class="form-check-label" for="customSwitch2">Disabled switch element</label>
                 </div>
               </div>
               <div class="mb-3">
@@ -1468,11 +1622,11 @@
               </div>
               <div class="mb-3">
                 <div class="input-group mb-3">
-                  <div class="custom-file">
+                  <div>
                     <input type="file" class="form-control" id="inputGroupFile02">
-                    <label class="form-label" for="inputGroupFile02">Choose file</label>
+                    <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
                   </div>
-                  <div class="input-group-append">
+                  <div>
                     <span class="input-group-text">Upload</span>
                   </div>
                 </div>
@@ -1770,24 +1924,24 @@
       <div>
         <h2>Badges</h2>
         <div class="bs-component mb-4">
-          <span class="badge-primary">Primary</span>
-          <span class="badge-secondary">Secondary</span>
-          <span class="badge-success">Success</span>
-          <span class="badge-danger">Danger</span>
-          <span class="badge-warning">Warning</span>
-          <span class="badge-info">Info</span>
-          <span class="badge-light">Light</span>
-          <span class="badge-dark">Dark</span>
+          <span class="badge badge-primary">Primary</span>
+          <span class="badge badge-secondary">Secondary</span>
+          <span class="badge badge-success">Success</span>
+          <span class="badge badge-danger">Danger</span>
+          <span class="badge badge-warning">Warning</span>
+          <span class="badge badge-info">Info</span>
+          <span class="badge badge-light">Light</span>
+          <span class="badge badge-dark">Dark</span>
         </div>
         <div class="bs-component">
-          <span class="-primary">Primary</span>
-          <span class="-secondary">Secondary</span>
-          <span class="-success">Success</span>
-          <span class="-danger">Danger</span>
-          <span class="-warning">Warning</span>
-          <span class="-info">Info</span>
-          <span class="-light">Light</span>
-          <span class="-dark">Dark</span>
+          <span class="badge badge-pill badge-primary">Primary</span>
+          <span class="badge badge-pill badge-secondary">Secondary</span>
+          <span class="badge badge-pill badge-success">Success</span>
+          <span class="badge badge-pill badge-danger">Danger</span>
+          <span class="badge badge-pill badge-warning">Warning</span>
+          <span class="badge badge-pill badge-info">Info</span>
+          <span class="badge badge-pill badge-light">Light</span>
+          <span class="badge badge-pill badge-dark">Dark</span>
         </div>
       </div>
     </div>
@@ -1871,7 +2025,7 @@
             <h1 id="containers">Containers</h1>
           </div>
           <div class="bs-component">
-            <div class="bg-light mb-4 rounded-2 py-5 px-3">
+            <div class="jumbotron">
               <h1 class="display-3">Hello, world!</h1>
               <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
               <hr class="my-4">
@@ -1896,15 +2050,15 @@
             <ul class="list-group">
               <li class="list-group-item d-flex justify-content-between align-items-center">
                 Cras justo odio
-                <span class="badge-primary badge-pill">14</span>
+                <span class="badge badge-primary badge-pill">14</span>
               </li>
               <li class="list-group-item d-flex justify-content-between align-items-center">
                 Dapibus ac facilisis in
-                <span class="badge-primary badge-pill">2</span>
+                <span class="badge badge-primary badge-pill">2</span>
               </li>
               <li class="list-group-item d-flex justify-content-between align-items-center">
                 Morbi leo risus
-                <span class="badge-primary badge-pill">1</span>
+                <span class="badge badge-primary badge-pill">1</span>
               </li>
             </ul>
           </div>
@@ -2131,9 +2285,7 @@
                 <div class="modal-content">
                   <div class="modal-header">
                     <h5 class="modal-title">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-
-                    </button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                   </div>
                   <div class="modal-body">
                     <p>Modal body text goes here.</p>
@@ -2172,11 +2324,9 @@
           <div class="bs-component">
             <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
               <div class="toast-header">
-                <strong class="me-auto">Bootstrap</strong>
+                <strong class="mr-auto">Bootstrap</strong>
                 <small>11 mins ago</small>
-                <button type="button" class="ms-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-
-                </button>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close"><span aria-hidden="true">&times;</span></button>
               </div>
               <div class="toast-body">
                 Hello, world! This is a toast message.
@@ -2205,7 +2355,7 @@
       <div class="row">
         <div class="col-lg-12">
           <ul class="list-unstyled">
-            <li class="float-lg-end"><a href="#top">Back to top</a></li>
+            <li class="float-lg-right"><a href="#top">Back to top</a></li>
             <li><a href="https://blog.bootswatch.com/">Blog</a></li>
             <li><a href="https://blog.bootswatch.com/rss/">RSS</a></li>
             <li><a href="https://twitter.com/bootswatch">Twitter</a></li>

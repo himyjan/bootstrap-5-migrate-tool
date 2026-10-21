@@ -1,7 +1,7 @@
 {
   "name": "bootstrap-5-migrate-tool",
   "version": "1.0.0",
-  "description": "A command-line tool designed to help you upgrade your Bootstrap 4 projects to Bootstrap 5",
+  "description": "A command-line tool designed to help you migrate your Bootstrap 3, 4 and 5 projects to another Bootstrap version",
   "homepage": "https://github.com/coliff/bootstrap-5-migrate-tool",
   "bugs": {
     "url": "https://github.com/coliff/bootstrap-5-migrate-tool/issues"
@@ -23,9 +23,10 @@
     "start4to3": "gulp migrate4to3 --src ./src4to3 --dest ./dest",
     "start5to4": "gulp migrate5to4 --src ./src5to4 --dest ./dest",
     "htmlhint": "npx htmlhint **/*.html",
-    "lint": "eslint \"*.js\" --fix",
+    "coverage": "node scripts/build-coverage.js",
+    "lint": "eslint \"*.js\" \"lib/**/*.js\" \"scripts/**/*.js\" \"test/**/*.js\" --fix",
     "prettier": "prettier --write \"**/*.{js,md,yml,json}\" --ignore-path .prettierignore",
-    "test": "npm run lint && npm run prettier && npm run start"
+    "test": "npm run lint && npm run prettier && node --test && npm run start && npm run start3to4 && npm run start4to3 && npm run start5to4"
   },
   "dependencies": {
     "gulp": "^5.0.1",
@@ -38,7 +39,8 @@
     "prettier": "^3.9.8"
   },
   "files": [
-    "gulpfile.js"
+    "gulpfile.js",
+    "lib"
   ],
   "eslintConfig": {
     "extends": "eslint:recommended",
